@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VideoEdit : MonoBehaviour
+namespace Assets.Scripts.Menu
 {
-    [SerializeField] private UnityEngine.Video.VideoPlayer _videoPlayer;
-    [SerializeField] private GameObject _canvas;
-
-    private void Start()
+    public class VideoEdit : MonoBehaviour
     {
-        _videoPlayer.loopPointReached += OnFinish;
-    }
+        [SerializeField] private UnityEngine.Video.VideoPlayer _videoPlayer;
+        [SerializeField] private GameObject _canvas;
+        [SerializeField] private BackgroundMusic _bgMusic;
 
-    void OnFinish(UnityEngine.Video.VideoPlayer vp)
-    {
-        _canvas.SetActive(true);
-        vp.gameObject.SetActive(false);
+        private void Start()
+        {
+            _videoPlayer.loopPointReached += OnFinish;
+        }
+
+        void OnFinish(UnityEngine.Video.VideoPlayer vp)
+        {
+            _canvas.SetActive(true);
+            _bgMusic.PlayMusic();
+            vp.gameObject.SetActive(false);
+        }
     }
 }

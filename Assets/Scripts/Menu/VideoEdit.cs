@@ -7,7 +7,7 @@ namespace Assets.Scripts.Menu
     public class VideoEdit : MonoBehaviour
     {
         [SerializeField] private UnityEngine.Video.VideoPlayer _videoPlayer;
-        [SerializeField] private GameObject _canvas;
+        [SerializeField] private GameObject _menuCanvas, _introCanvas;
         [SerializeField] private BackgroundMusic _bgMusic;
 
         private void Start()
@@ -17,9 +17,19 @@ namespace Assets.Scripts.Menu
 
         void OnFinish(UnityEngine.Video.VideoPlayer vp)
         {
-            _canvas.SetActive(true);
+            FinishVideo();
+        }
+
+        public void OnSkip()
+        {
+            FinishVideo();
+        }
+
+        private void FinishVideo()
+        {
+            _menuCanvas.SetActive(true);
             _bgMusic.PlayMusic();
-            vp.gameObject.SetActive(false);
+            _introCanvas.SetActive(false);
         }
     }
 }

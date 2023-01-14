@@ -1,0 +1,34 @@
+{
+    "name": "PlayerActions",
+    "maps": [
+        {
+            "name": "Menu",
+            "id": "81904488-c157-47e4-a928-1d6ed453de50",
+            "actions": [
+                {
+                    "name": "Skip",
+                    "type": "Button",
+                    "id": "545ed71c-a7cb-4b0a-8625-d9cc18e4879b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "67a4665d-94a8-448b-9618-516cd6722f86",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

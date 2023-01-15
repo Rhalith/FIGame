@@ -6,9 +6,8 @@ public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private ScrollBackground _scrollBg;
+    [SerializeField] private GameObject _tireMenu;
 
-
-    private float _speedInPitLane;
     public void EnterPitLane()
     {
         _scrollBg.Speed = 0.2f;
@@ -17,15 +16,19 @@ public class PlayerAnimation : MonoBehaviour
     public void StartPitStop()
     {
         _scrollBg.Speed = 0;
+        _tireMenu.SetActive(true);
     }
 
     public void AfterPitStop()
     {
         _scrollBg.Speed = 0.2f;
+        _animator.SetBool("isTireSelected", true);
+        _tireMenu.SetActive(false);
     }
 
     public void ExitPitLane()
     {
         _scrollBg.Speed = 0.4f;
+        _animator.SetBool("isTireSelected", false);
     }
 }

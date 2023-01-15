@@ -57,16 +57,9 @@ public class GameManager : MonoBehaviour
             ChangeDriverRadio(1);
         }
     }
-
-    private void ChangeDriver(int i)
+    public void ChangeTyre(string tyre)
     {
-        if(i == 0) _car.sprite = _maxCarSprite;
-        else _car.sprite= _lewisCarSprite;
-    }
-
-    private void ChangeTyre(string tyre)
-    {
-        switch(tyre)
+        switch (tyre)
         {
             case "soft":
                 _tyre.sprite = _softTyreSprite;
@@ -80,7 +73,13 @@ public class GameManager : MonoBehaviour
                 _tyre.sprite = _hardTyreSprite;
                 _tyreLogo.sprite = _hardTyreLogoSprite;
                 break;
-        } 
+        }
+    }
+
+    private void ChangeDriver(int i)
+    {
+        if(i == 0) _car.sprite = _maxCarSprite;
+        else _car.sprite= _lewisCarSprite;
     }
 
     private void ChangeHealthBar(int i)

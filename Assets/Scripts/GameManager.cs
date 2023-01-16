@@ -1,4 +1,5 @@
 using Assets.Scripts.Menu;
+using Assets.Scripts.Player;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,16 +24,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite _softTyreSprite;
     [SerializeField] private Sprite _mediumTyreSprite;
     [SerializeField] private Sprite _hardTyreSprite;
+    [SerializeField] private PlayerSpecs _playerSpecs;
     #endregion
 
     #region HealthBar
     [Header("HealthBar")]
-    [SerializeField] private Image _healthbar;
+    [SerializeField] private Image _healthbarImage;
     [SerializeField] private Sprite _maxHealthbarSprite;
     [SerializeField] private Sprite _lewisHealthbarSprite;
     [SerializeField] private Sprite _softTyreLogoSprite;
     [SerializeField] private Sprite _mediumTyreLogoSprite;
     [SerializeField] private Sprite _hardTyreLogoSprite;
+    [SerializeField] private Healthbar _healthbar;
     #endregion
     #region RadioBar
     [Header("RadioBar")]
@@ -47,33 +50,52 @@ public class GameManager : MonoBehaviour
         if (isMax)
         {
             ChangeDriver(0);
-            ChangeHealthBar(0);
+            ChangeHealthBarImage(0);
             ChangeDriverRadio(0);
         }
         else
         {
             ChangeDriver(1);
-            ChangeHealthBar(1);
+            ChangeHealthBarImage(1);
             ChangeDriverRadio(1);
         }
     }
-    public void ChangeTyre(string tyre)
+
+    public void SetTyre(string tire)
     {
-        switch (tyre)
+        switch (tire)
         {
             case "soft":
+                ChangeTyre(Tire.Soft);
+                break;
+            case "medium":
+                ChangeTyre(Tire.Medium);
+                break;
+            case "hard":
+                ChangeTyre(Tire.Hard);
+                break;
+        }
+    }
+    private void ChangeTyre(Tire tire)
+    {
+        switch (tire)
+        {
+            case Tire.Soft: 
                 _tyre.sprite = _softTyreSprite;
                 _tyreLogo.sprite = _softTyreLogoSprite;
                 break;
-            case "medium":
+            case Tire.Medium:
                 _tyre.sprite = _mediumTyreSprite;
                 _tyreLogo.sprite = _mediumTyreLogoSprite;
                 break;
-            case "hard":
+            case Tire.Hard:
                 _tyre.sprite = _hardTyreSprite;
                 _tyreLogo.sprite = _hardTyreLogoSprite;
                 break;
         }
+        _playerSpecs.ChangePlayerSpeed(tire);
+        _playerSpecs.ResetPlayerHealth();
+        _healthbar.SetHealth(_playerSpecs.PlayerHealth);
     }
 
     private void ChangeDriver(int i)
@@ -82,10 +104,10 @@ public class GameManager : MonoBehaviour
         else _car.sprite= _lewisCarSprite;
     }
 
-    private void ChangeHealthBar(int i)
+    private void ChangeHealthBarImage(int i)
     {
-        if (i == 0) _healthbar.sprite = _maxHealthbarSprite;
-        else _healthbar.sprite = _lewisHealthbarSprite;
+        if (i == 0) _healthbarImage.sprite = _maxHealthbarSprite;
+        else _healthbarImage.sprite = _lewisHealthbarSprite;
     }
 
     private void ChangeDriverRadio(int i)
@@ -105,4 +127,11 @@ public class GameManager : MonoBehaviour
         _audioSource.Play();
         _audioFinish.FinishAudio();
     }
+}
+
+public enum Tire
+{
+    Soft,
+    Medium,
+    Hard
 }

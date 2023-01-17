@@ -1,3 +1,4 @@
+using Assets.Scripts.Menu;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ namespace Assets.Scripts.Player
 {
     public class PlayerSpecs : MonoBehaviour
     {
+        [SerializeField] private Healthbar _healthBar;
+
         private float _playerHealth = 100;
         private float _playerSpeed;
 
@@ -14,8 +17,12 @@ namespace Assets.Scripts.Player
 
         public void DamagePlayer(float damage)
         {
-            _playerHealth -= damage;
-            if (_playerHealth <= 0)
+            if (_playerHealth > 0)
+            {
+                _playerHealth -= damage;
+                _healthBar.SetHealth(_playerHealth);
+            }
+            else
             {
                 OnDeath();
             }

@@ -7,6 +7,8 @@ public class MasiAnimation : MonoBehaviour
     [SerializeField] private Animator _moveAnimator;
     [SerializeField] private Animator _fireAnimator;
 
+    [SerializeField] private MasiAttack _masiAttack;
+
     public void StartComing()
     {
         SetGoing(0);
@@ -20,11 +22,13 @@ public class MasiAnimation : MonoBehaviour
     public void StartFire()
     {
         SetFire(1);
+        _masiAttack.StartShooting();
     }
 
     public void StopFire()
     {
         SetFire(0);
+        _masiAttack.StopShooting();
     }
 
     private void SetFire(int i)

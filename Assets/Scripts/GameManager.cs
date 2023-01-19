@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private Image _tyreLogo;
+
 
     #region Car
     [Header("Car")]
@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite _maxCarSprite;
     [SerializeField] private Sprite _lewisCarSprite;
     #endregion
-
     #region CarTyre
     [Header("CarTyre")]
     [SerializeField] private Image _tyre;
@@ -26,9 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite _hardTyreSprite;
     [SerializeField] private PlayerSpecs _playerSpecs;
     #endregion
-
     #region HealthBar
     [Header("HealthBar")]
+    [SerializeField] private Image _tyreLogo;
     [SerializeField] private Image _healthbarImage;
     [SerializeField] private Sprite _maxHealthbarSprite;
     [SerializeField] private Sprite _lewisHealthbarSprite;
@@ -45,6 +44,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text _driverText;
     [SerializeField] private AudioFinish _audioFinish;
     #endregion
+    #region Managers
+    [Header("Managers")]
+    [SerializeField] private PlayerManager _playerManager;
+    [SerializeField] private MasiManager _masiManager;
+    #endregion
     public void SetupGame(bool isMax)
     {
         if (isMax)
@@ -59,6 +63,8 @@ public class GameManager : MonoBehaviour
             ChangeHealthBarImage(1);
             ChangeDriverRadio(1);
         }
+        _playerManager.SetMasiManager(_masiManager);
+        _playerManager.SetPlayerManager();
     }
 
     public void SetTyre(string tire)

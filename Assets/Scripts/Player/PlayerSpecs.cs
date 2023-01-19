@@ -9,11 +9,13 @@ namespace Assets.Scripts.Player
     {
         [SerializeField] private Healthbar _healthBar;
 
+        private PlayerManager _playerManager;
         private float _playerHealth = 100;
         private float _playerSpeed;
 
         public float PlayerSpeed { get => _playerSpeed; }
         public float PlayerHealth { get => _playerHealth; }
+        public PlayerManager PlayerManager { set => _playerManager = value; }
 
         public void DamagePlayer(float damage)
         {
@@ -24,7 +26,7 @@ namespace Assets.Scripts.Player
             }
             else
             {
-                OnDeath();
+                _playerManager.OnDeath();
             }
         }
 
@@ -49,7 +51,7 @@ namespace Assets.Scripts.Player
             }
         }
 
-        private void OnDeath()
+        public void StopPlayerMovement()
         {
             _playerSpeed = 0;
         }

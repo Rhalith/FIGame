@@ -14,7 +14,6 @@ public class MasiAttack : MonoBehaviour
     {
         _shooting = true;
         StartCoroutine(Shooting());
-        
     }
 
     public void StopShooting()

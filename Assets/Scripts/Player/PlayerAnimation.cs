@@ -1,3 +1,4 @@
+using Assets.Scripts.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,13 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private ScrollBackground _scrollBg;
     [SerializeField] private GameObject _tireMenu;
-    [SerializeField] private MasiAnimation _masiAnimation;
+
+    private PlayerManager _playerManager;
+    private MasiManager _masiManager;
+    
+    public MasiManager MasiManager { set => _masiManager = value; }
+    public PlayerManager PlayerManager { set => _playerManager = value; }
+
 
     public void EnterPitLane()
     {
@@ -32,7 +39,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         _scrollBg.Speed = 0.4f;
         _animator.SetBool("isTireSelected", false);
-        _masiAnimation.StartComing();
+        _masiManager.StartComing();
         _animator.enabled = false;
     }
 }

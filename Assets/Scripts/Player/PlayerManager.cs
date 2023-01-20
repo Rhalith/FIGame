@@ -21,6 +21,7 @@ namespace Assets.Scripts.Player
         [SerializeField] private Animator _animator;
         [SerializeField] private Healthbar _healthBar;
         [SerializeField] private Rigidbody2D _rigidbody;
+        [SerializeField] private GameObject _deathScreen;
         #endregion
 
         #region Getters and Setters
@@ -33,6 +34,7 @@ namespace Assets.Scripts.Player
         public Animator Animator { get => _animator; }
         public Healthbar HealthBar { get => _healthBar; }
         public Rigidbody2D Rigidbody { get => _rigidbody; }
+        public GameObject DeathScreen { get => _deathScreen; }
 
         #endregion
 

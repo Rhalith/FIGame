@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Assets.Scripts.Player
         {
             _masiManager.StopAttack();
             _playerManager.PlayerSpecs.StopPlayerMovement();
+            DOTween.To(() => _playerManager.ScrollBackground.Speed, x => _playerManager.ScrollBackground.Speed = x, 0, 1f);
         }
     }
 }

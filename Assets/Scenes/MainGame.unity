@@ -5184,9 +5184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c9df909d58e14647baf8e8cd60f68af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 1099727860}
-  _scrollBg: {fileID: 732320541}
-  _tireMenu: {fileID: 1597514090}
 --- !u!114 &1099727862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5249,8 +5246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80bbf1e771bfdae4395484e565598c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 1099727864}
-  _playerSpecs: {fileID: 1099727866}
 --- !u!50 &1099727864
 Rigidbody2D:
   serializedVersion: 4
@@ -5335,7 +5330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7380281619d31e94ba1c651e0a003a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 368181048}
 --- !u!114 &1099727867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10381,6 +10375,11 @@ MonoBehaviour:
   _playerDeath: {fileID: 1099727867}
   _playerSpecs: {fileID: 1099727866}
   _playerMovement: {fileID: 1099727863}
+  _scrollBackground: {fileID: 732320541}
+  _tireMenu: {fileID: 1597514090}
+  _animator: {fileID: 1099727860}
+  _healthBar: {fileID: 368181048}
+  _rigidbody: {fileID: 1099727864}
 --- !u!1 &1987016234
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,10 +7,11 @@ namespace Assets.Scripts.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private PlayerSpecs _playerSpecs;
+
+        private PlayerManager _playerManager;
         private Vector2 _movement;
 
+        public PlayerManager PlayerManager { set => _playerManager = value; }
 
         public void OnMove(InputAction.CallbackContext obj)
         {
@@ -23,7 +24,7 @@ namespace Assets.Scripts.Player
 
         private void MovePlayer()
         {
-            _rigidbody.velocity = new Vector2(_movement.x, _movement.y) * _playerSpecs.PlayerSpeed * 200;
+            _playerManager.Rigidbody.velocity = new Vector2(_movement.x, _movement.y) * _playerManager.PlayerSpecs.PlayerSpeed * 200;
         }
     }
 }

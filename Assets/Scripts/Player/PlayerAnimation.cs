@@ -1,14 +1,12 @@
 using Assets.Scripts.Player;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
-    [SerializeField] private ScrollBackground _scrollBg;
-    [SerializeField] private GameObject _tireMenu;
-
     private PlayerManager _playerManager;
     private MasiManager _masiManager;
     
@@ -18,28 +16,28 @@ public class PlayerAnimation : MonoBehaviour
 
     public void EnterPitLane()
     {
-        _animator.enabled = true;
-        _scrollBg.Speed = 0.2f;
+        _playerManager.Animator.enabled = true;
+        DOTween.To(() => _playerManager.ScrollBackground.Speed, x => _playerManager.ScrollBackground.Speed = x, 0.2f, 1f);
     }
 
     public void StartPitStop()
     {
-        _scrollBg.Speed = 0;
-        _tireMenu.SetActive(true);
+        DOTween.To(() => _playerManager.ScrollBackground.Speed, x => _playerManager.ScrollBackground.Speed = x, 0, 1f);
+        _playerManager.TireMenu.SetActive(true);
     }
 
     public void AfterPitStop()
     {
-        _scrollBg.Speed = 0.2f;
-        _animator.SetBool("isTireSelected", true);
-        _tireMenu.SetActive(false);
+        DOTween.To(() => _playerManager.ScrollBackground.Speed, x => _playerManager.ScrollBackground.Speed = x, 0.2f, 1f);
+        _playerManager.Animator.SetBool("isTireSelected", true);
+        _playerManager.TireMenu.SetActive(false);
     }
 
     public void ExitPitLane()
     {
-        _scrollBg.Speed = 0.4f;
-        _animator.SetBool("isTireSelected", false);
+        DOTween.To(() => _playerManager.ScrollBackground.Speed, x => _playerManager.ScrollBackground.Speed = x, 0.4f, 1f);
+        _playerManager.Animator.SetBool("isTireSelected", false);
         _masiManager.StartComing();
-        _animator.enabled = false;
+        _playerManager.Animator.enabled = false;
     }
 }

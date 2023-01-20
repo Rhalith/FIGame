@@ -7,8 +7,6 @@ namespace Assets.Scripts.Player
 {
     public class PlayerSpecs : MonoBehaviour
     {
-        [SerializeField] private Healthbar _healthBar;
-
         private PlayerManager _playerManager;
         private float _playerHealth = 100;
         private float _playerSpeed;
@@ -22,7 +20,7 @@ namespace Assets.Scripts.Player
             if (_playerHealth > 0)
             {
                 _playerHealth -= damage;
-                _healthBar.SetHealth(_playerHealth);
+                _playerManager.HealthBar.SetHealth(_playerHealth);
             }
             else
             {

@@ -24,5 +24,11 @@ namespace Assets.Scripts.Menu
             _audioSource.Stop();
             _image.color = _defaultColor;
         }
+
+        public void ResetHighlighter()
+        {
+            _audioSource.Stop();
+            _image.color = _defaultColor;
+        }
     }
 }

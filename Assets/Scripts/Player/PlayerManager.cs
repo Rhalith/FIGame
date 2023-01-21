@@ -38,10 +38,6 @@ namespace Assets.Scripts.Player
 
         #endregion
 
-        #region Fields
-        public delegate void PlayerAction();
-        public PlayerAction OnPlayerReset;
-        #endregion
 
         public void SetMasiManager(MasiManager masiManager)
         {
@@ -56,14 +52,10 @@ namespace Assets.Scripts.Player
             _playerMovement.PlayerManager = this;
         }
 
+
         public void OnDeath()
         {
             _playerDeath.KillPlayer();
-        }
-
-        public void OnReset()
-        {
-            OnPlayerReset?.Invoke();
         }
     }
 }

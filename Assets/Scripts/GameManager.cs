@@ -49,8 +49,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private MasiManager _masiManager;
     #endregion
+    #region Restart Properties
+    [SerializeField] private GameObject _deathScreen;
+    [SerializeField] private GameObject _mainGame;
+    [SerializeField] private GameObject _mainMenu;
+    [SerializeField] private ScrollBackground _scrollBackground;
+    #endregion
     #region Getters & Setters
     public Healthbar Healthbar { get => _healthbar; }
+    public PlayerManager PlayerManager { get => _playerManager; }
+    public MasiManager MasiManager { get => _masiManager; }
     #endregion
     public void SetupGame(bool isMax)
     {
@@ -68,6 +76,13 @@ public class GameManager : MonoBehaviour
             ChangeHealthBarImage(1);
             ChangeDriverRadio(1);
         }
+    }
+    public void ResetGame()
+    {
+        _audioFinish.gameObject.SetActive(true);
+        _scrollBackground.Speed = 0.4f;
+        _mainGame.SetActive(false);
+        _mainMenu.SetActive(true);
     }
 
     public void SetTyre(string tire)

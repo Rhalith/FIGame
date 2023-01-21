@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -23,7 +24,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite _softTyreSprite;
     [SerializeField] private Sprite _mediumTyreSprite;
     [SerializeField] private Sprite _hardTyreSprite;
-    [SerializeField] private PlayerSpecs _playerSpecs;
     #endregion
     #region HealthBar
     [Header("HealthBar")]
@@ -49,8 +49,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private MasiManager _masiManager;
     #endregion
+    #region Getters & Setters
+    public Healthbar Healthbar { get => _healthbar; }
+    #endregion
     public void SetupGame(bool isMax)
     {
+        _playerManager.SetMasiManager(_masiManager);
+        _playerManager.SetPlayerManager();
         if (isMax)
         {
             ChangeDriver(0);
@@ -63,8 +68,6 @@ public class GameManager : MonoBehaviour
             ChangeHealthBarImage(1);
             ChangeDriverRadio(1);
         }
-        _playerManager.SetMasiManager(_masiManager);
-        _playerManager.SetPlayerManager();
     }
 
     public void SetTyre(string tire)
@@ -99,9 +102,9 @@ public class GameManager : MonoBehaviour
                 _tyreLogo.sprite = _hardTyreLogoSprite;
                 break;
         }
-        _playerSpecs.ChangePlayerSpeed(tire);
-        _playerSpecs.ResetPlayerHealth();
-        _healthbar.SetHealth(_playerSpecs.PlayerHealth);
+        _playerManager.PlayerSpecs.ChangePlayerSpeed(tire);
+        _playerManager.PlayerSpecs.ResetPlayerHealth();
+        _healthbar.SetHealth(_playerManager.PlayerSpecs.PlayerHealth);
     }
 
     private void ChangeDriver(int i)

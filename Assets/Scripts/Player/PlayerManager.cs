@@ -16,10 +16,10 @@ namespace Assets.Scripts.Player
         #endregion
         #region Other Components
         [Header("Other Components")]
+        [SerializeField] private GameManager _gameManager;
         [SerializeField] private ScrollBackground _scrollBackground;
         [SerializeField] private GameObject _tireMenu;
         [SerializeField] private Animator _animator;
-        [SerializeField] private Healthbar _healthBar;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private GameObject _deathScreen;
         #endregion
@@ -32,10 +32,15 @@ namespace Assets.Scripts.Player
         public ScrollBackground ScrollBackground { get => _scrollBackground; }
         public GameObject TireMenu { get => _tireMenu; }
         public Animator Animator { get => _animator; }
-        public Healthbar HealthBar { get => _healthBar; }
         public Rigidbody2D Rigidbody { get => _rigidbody; }
         public GameObject DeathScreen { get => _deathScreen; }
+        public GameManager GameManager { get => _gameManager; }
 
+        #endregion
+
+        #region Fields
+        public delegate void PlayerAction();
+        public PlayerAction OnPlayerReset;
         #endregion
 
         public void SetMasiManager(MasiManager masiManager)
@@ -54,6 +59,11 @@ namespace Assets.Scripts.Player
         public void OnDeath()
         {
             _playerDeath.KillPlayer();
+        }
+
+        public void OnReset()
+        {
+            OnPlayerReset?.Invoke();
         }
     }
 }

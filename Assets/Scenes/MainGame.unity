@@ -4027,18 +4027,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 574078559}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1627342623}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -4062,6 +4050,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 574078559}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &926083488
 MonoBehaviour:
@@ -5750,18 +5750,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 574078559}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1627342623}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -5777,6 +5765,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1627342625}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SetupGame
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 574078559}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8847,7 +8847,6 @@ MonoBehaviour:
   _softTyreSprite: {fileID: 21300000, guid: 7cc14bda5a0ed7c438bded5e6b874477, type: 3}
   _mediumTyreSprite: {fileID: 21300000, guid: 19fcd280e56581549be57668fef62af3, type: 3}
   _hardTyreSprite: {fileID: 21300000, guid: 8eddcc24779597f4b8f96fab85319772, type: 3}
-  _playerSpecs: {fileID: 1099727866}
   _tyreLogo: {fileID: 1016347344}
   _healthbarImage: {fileID: 368181046}
   _maxHealthbarSprite: {fileID: 21300000, guid: eb0772f93af7a0142a71cd22c882ccd6, type: 3}
@@ -10886,10 +10885,10 @@ MonoBehaviour:
   _playerDeath: {fileID: 1099727867}
   _playerSpecs: {fileID: 1099727866}
   _playerMovement: {fileID: 1099727863}
+  _gameManager: {fileID: 1627342625}
   _scrollBackground: {fileID: 732320541}
   _tireMenu: {fileID: 1597514090}
   _animator: {fileID: 1099727860}
-  _healthBar: {fileID: 368181048}
   _rigidbody: {fileID: 1099727864}
   _deathScreen: {fileID: 1486563086}
 --- !u!1 &1987016234

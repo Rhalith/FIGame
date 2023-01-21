@@ -15,12 +15,13 @@ namespace Assets.Scripts.Player
         public float PlayerHealth { get => _playerHealth; }
         public PlayerManager PlayerManager { set => _playerManager = value; }
 
+
         public void DamagePlayer(float damage)
         {
             if (_playerHealth > 0)
             {
                 _playerHealth -= damage;
-                _playerManager.HealthBar.SetHealth(_playerHealth);
+                _playerManager.GameManager.Healthbar.SetHealth(_playerHealth);
             }
             else
             {

@@ -1,11 +1,9 @@
-using Scripts.Masi;
 using Scripts.Menu;
-using Scripts.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts
+namespace Scripts.Managers
 {
     public class GameManager : MonoBehaviour
     {

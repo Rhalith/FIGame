@@ -1,6 +1,7 @@
+using Scripts.Masi;
 using UnityEngine;
 
-namespace Scripts.Masi
+namespace Scripts.Managers
 {
     public class MasiManager : MonoBehaviour
     {

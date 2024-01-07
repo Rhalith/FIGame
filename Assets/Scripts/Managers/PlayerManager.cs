@@ -1,7 +1,7 @@
-using Scripts.Masi;
+using Scripts.Player;
 using UnityEngine;
 
-namespace Scripts.Player
+namespace Scripts.Managers
 {
     public class PlayerManager : MonoBehaviour
     {

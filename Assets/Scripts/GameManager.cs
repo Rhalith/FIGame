@@ -1,7 +1,8 @@
-using Assets.Scripts.Menu;
-using Assets.Scripts.Player;
 using System.Collections;
 using System.Collections.Generic;
+using Masi;
+using Menu;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;

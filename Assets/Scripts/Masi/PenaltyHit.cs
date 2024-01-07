@@ -1,11 +1,9 @@
-using Assets.Scripts.Player;
 using System.Collections;
-using System.Collections.Generic;
+using Player;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Masi
+namespace Masi
 {
     public class PenaltyHit : MonoBehaviour
     {

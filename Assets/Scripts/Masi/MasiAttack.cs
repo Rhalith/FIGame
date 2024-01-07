@@ -1,34 +1,36 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MasiAttack : MonoBehaviour
+namespace Masi
 {
-    [SerializeField] private PenaltyController _penaltyController;
-    [SerializeField] private GameObject _target;
-    [SerializeField] private float _fireRate;
-
-    private bool _shooting;
-
-    public void StartShooting()
+    public class MasiAttack : MonoBehaviour
     {
-        _shooting = true;
-        StartCoroutine(Shooting());
-    }
+        [SerializeField] private PenaltyController _penaltyController;
+        [SerializeField] private GameObject _target;
+        [SerializeField] private float _fireRate;
 
-    public void StopShooting()
-    {
-        _shooting = false;
-        StopCoroutine(Shooting());
-    }
+        private bool _shooting;
 
-
-    IEnumerator Shooting()
-    {
-        while (_shooting)
+        public void StartShooting()
         {
-            yield return new WaitForSeconds(1 / _fireRate);
-            _penaltyController.GetPooledObject().Shoot(_target.transform);
+            _shooting = true;
+            StartCoroutine(Shooting());
+        }
+
+        public void StopShooting()
+        {
+            _shooting = false;
+            StopCoroutine(Shooting());
+        }
+
+
+        IEnumerator Shooting()
+        {
+            while (_shooting)
+            {
+                yield return new WaitForSeconds(1 / _fireRate);
+                _penaltyController.GetPooledObject().Shoot(_target.transform);
+            }
         }
     }
 }

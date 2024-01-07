@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Menu
+namespace Menu
 {
     public class HighlightDriver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

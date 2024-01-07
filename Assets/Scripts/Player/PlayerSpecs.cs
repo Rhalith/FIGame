@@ -1,9 +1,6 @@
-using Assets.Scripts.Menu;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Player
+namespace Player
 {
     public class PlayerSpecs : MonoBehaviour
     {

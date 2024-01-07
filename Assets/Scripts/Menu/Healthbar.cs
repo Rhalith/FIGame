@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Menu
+namespace Menu
 {
     public class Healthbar : MonoBehaviour
     {

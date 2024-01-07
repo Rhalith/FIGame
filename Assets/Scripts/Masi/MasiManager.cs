@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Masi
+namespace Scripts.Masi
 {
     public class MasiManager : MonoBehaviour
     {

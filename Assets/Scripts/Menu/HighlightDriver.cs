@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Menu
+namespace Scripts.Menu
 {
     public class HighlightDriver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

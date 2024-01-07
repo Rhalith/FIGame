@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace EventBus
+namespace Scripts.EventBus
 {
     public static class EventBus<TEvent>
     {

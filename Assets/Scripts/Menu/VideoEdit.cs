@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Menu
+namespace Scripts.Menu
 {
     public class VideoEdit : MonoBehaviour
     {

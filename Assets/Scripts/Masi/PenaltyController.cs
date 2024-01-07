@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Masi
+namespace Scripts.Masi
 {
     public class PenaltyController : MonoBehaviour
     {

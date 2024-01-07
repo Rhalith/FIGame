@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Menu
+namespace Scripts.Menu
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioFinish : MonoBehaviour

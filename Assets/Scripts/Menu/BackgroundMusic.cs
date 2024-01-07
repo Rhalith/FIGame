@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
-namespace Menu
+namespace Scripts.Menu
 {
     public class BackgroundMusic : MonoBehaviour
     {

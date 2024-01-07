@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Masi
+namespace Scripts.Masi
 {
     public class MasiAttack : MonoBehaviour
     {

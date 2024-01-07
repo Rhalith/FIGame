@@ -1,8 +1,8 @@
 using DG.Tweening;
-using Masi;
+using Scripts.Masi;
 using UnityEngine;
 
-namespace Player
+namespace Scripts.Player
 {
     public class PlayerDeath : MonoBehaviour
     {

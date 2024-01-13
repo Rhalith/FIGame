@@ -18,7 +18,7 @@ namespace Scripts.Menu
             StartCoroutine(WaitForSound());
         }
 
-        IEnumerator WaitForSound()
+        private IEnumerator WaitForSound()
         {
             yield return new WaitForSeconds(_duration);
             onFinishSound.Invoke();

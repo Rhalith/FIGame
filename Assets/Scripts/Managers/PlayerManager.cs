@@ -1,3 +1,7 @@
+using System;
+using DG.Tweening;
+using Scripts.EventBus;
+using Scripts.Events;
 using Scripts.Player;
 using UnityEngine;
 
@@ -8,10 +12,9 @@ namespace Scripts.Managers
         #region Player Scripts
         [Header("Player Scripts")]
         [SerializeField] private PlayerAnimation _playerAnimation;
-        [SerializeField] private PlayerDeath _playerDeath;
-        [SerializeField] private PlayerSpecs _playerSpecs;
         [SerializeField] private PlayerMovement _playerMovement;
         #endregion
+        
         #region Other Components
         [Header("Other Components")]
         [SerializeField] private GameManager _gameManager;
@@ -22,38 +25,59 @@ namespace Scripts.Managers
         [SerializeField] private GameObject _deathScreen;
         #endregion
 
-        #region Getters and Setters
-        public PlayerAnimation PlayerAnimation { get => _playerAnimation; set => _playerAnimation = value; }
-        public PlayerDeath PlayerDeath { get => _playerDeath; set => _playerDeath = value; }
-        public PlayerSpecs PlayerSpecs { get => _playerSpecs; set => _playerSpecs = value; }
-        public PlayerMovement PlayerMovement { get => _playerMovement; set => _playerMovement = value; }
-        public ScrollBackground ScrollBackground { get => _scrollBackground; }
-        public GameObject TireMenu { get => _tireMenu; }
-        public Animator Animator { get => _animator; }
-        public Rigidbody2D Rigidbody { get => _rigidbody; }
-        public GameObject DeathScreen { get => _deathScreen; }
-        public GameManager GameManager { get => _gameManager; }
-
-        #endregion
-
-
-        public void SetMasiManager(MasiManager masiManager)
+        private void OnEnable()
         {
-            _playerAnimation.MasiManager = masiManager;
-            _playerDeath.MasiManager = masiManager;
+            EventBus<PitLaneEntranceEvent>.AddListener(PitLaneEntrance);
+            EventBus<PitStopEvent>.AddListener(PitStop);
+            EventBus<PlayerDeathEvent>.AddListener(KillPlayer);
         }
-        public void SetPlayerManager()
+        
+        private void OnDisable()
         {
-            _playerAnimation.PlayerManager = this;
-            _playerDeath.PlayerManager = this;
-            _playerSpecs.PlayerManager = this;
-            _playerMovement.PlayerManager = this;
+            EventBus<PitLaneEntranceEvent>.RemoveListener(PitLaneEntrance);
+            EventBus<PitStopEvent>.RemoveListener(PitStop);
+            EventBus<PlayerDeathEvent>.RemoveListener(KillPlayer);
         }
 
-
-        public void OnDeath()
+        private void KillPlayer(object sender, PlayerDeathEvent @event)
         {
-            _playerDeath.KillPlayer();
+            DOTween.To(() => _scrollBackground.Speed, x => _scrollBackground.Speed = x, 0, 1f).OnComplete(() => _deathScreen.SetActive(true));
+        }
+
+        private void PitStop(object sender, PitStopEvent @event)
+        {
+            if (@event.IsStart)
+            {
+                ChangeBackGroundSpeed(0,1f);
+                _tireMenu.SetActive(true);
+            }
+            else
+            {
+                ChangeBackGroundSpeed(0.2f,1f);
+                _animator.SetBool("isTireSelected", true);
+                _tireMenu.SetActive(false);
+            }
+        }
+
+        private void PitLaneEntrance(object sender, PitLaneEntranceEvent @event)
+        {
+            if (@event.IsEntering)
+            {
+                _animator.enabled = true;
+                DOTween.To(() => _scrollBackground.Speed, x => _scrollBackground.Speed = x, 0.2f, 1f);
+            }
+            else
+            {
+                DOTween.To(() => _scrollBackground.Speed, x => _scrollBackground.Speed = x, 0.4f, 1f);
+                _animator.SetBool("isTireSelected", false);
+                _animator.enabled = false;
+            }
+        }
+        
+        
+        private void ChangeBackGroundSpeed(float speed, float duration)
+        {
+            DOTween.To(() => _scrollBackground.Speed, x => _scrollBackground.Speed = x, speed, duration);
         }
     }
 }

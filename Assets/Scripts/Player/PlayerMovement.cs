@@ -6,12 +6,9 @@ namespace Scripts.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-
-        private PlayerManager _playerManager;
+        [SerializeField] private PlayerSpecs _playerSpecs;
+        [SerializeField] private Rigidbody2D _rigidbody;
         private Vector2 _movement;
-
-        public PlayerManager PlayerManager { set => _playerManager = value; }
-
         public void OnMove(InputAction.CallbackContext obj)
         {
             _movement = obj.ReadValue<Vector2>();
@@ -23,7 +20,7 @@ namespace Scripts.Player
 
         private void MovePlayer()
         {
-            _playerManager.Rigidbody.velocity = new Vector2(_movement.x, _movement.y) * _playerManager.PlayerSpecs.PlayerSpeed * 200;
+            _rigidbody.velocity = new Vector2(_movement.x, _movement.y) * (_playerSpecs.PlayerSpeed * 200);
         }
     }
 }

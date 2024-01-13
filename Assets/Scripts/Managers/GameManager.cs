@@ -1,3 +1,6 @@
+using System;
+using Scripts.EventBus;
+using Scripts.Events;
 using Scripts.Menu;
 using TMPro;
 using UnityEngine;
@@ -7,9 +10,6 @@ namespace Scripts.Managers
 {
     public class GameManager : MonoBehaviour
     {
-
-
-
         #region Car
         [Header("Car")]
         [SerializeField] private Image _car;
@@ -55,13 +55,34 @@ namespace Scripts.Managers
         #endregion
         #region Getters & Setters
         public Healthbar Healthbar { get => _healthbar; }
-        public PlayerManager PlayerManager { get => _playerManager; }
-        public MasiManager MasiManager { get => _masiManager; }
+        public static GameManager Instance { get; private set; }
         #endregion
+
+        private bool _isSetup;
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+
+        private void OnEnable()
+        {
+            if (!_isSetup)
+            {
+                SetupGame(false);
+            }
+        }
+
         public void SetupGame(bool isMax)
         {
-            _playerManager.SetMasiManager(_masiManager);
-            _playerManager.SetPlayerManager();
             if (isMax)
             {
                 ChangeDriver(0);
@@ -74,6 +95,7 @@ namespace Scripts.Managers
                 ChangeHealthBarImage(1);
                 ChangeDriverRadio(1);
             }
+            _isSetup = true;
         }
         public void ResetGame()
         {
@@ -115,9 +137,8 @@ namespace Scripts.Managers
                     _tyreLogo.sprite = _hardTyreLogoSprite;
                     break;
             }
-            _playerManager.PlayerSpecs.ChangePlayerSpeed(tire);
-            _playerManager.PlayerSpecs.ResetPlayerHealth();
-            _healthbar.SetHealth(_playerManager.PlayerSpecs.PlayerHealth);
+            EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = tire });
+            _healthbar.SetHealth(100);
         }
 
         private void ChangeDriver(int i)

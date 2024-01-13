@@ -1,3 +1,6 @@
+using System;
+using Scripts.EventBus;
+using Scripts.Events;
 using Scripts.Managers;
 using UnityEngine;
 
@@ -5,13 +8,26 @@ namespace Scripts.Player
 {
     public class PlayerSpecs : MonoBehaviour
     {
-        private PlayerManager _playerManager;
         private float _playerHealth = 100;
-        private float _playerSpeed;
 
-        public float PlayerSpeed { get => _playerSpeed; }
-        public float PlayerHealth { get => _playerHealth; }
-        public PlayerManager PlayerManager { set => _playerManager = value; }
+        public float PlayerSpeed { get; private set; }
+
+
+        private void OnEnable()
+        {
+            EventBus<ChangeTireEvent>.AddListener(ChangeTire);
+        }
+        
+        private void OnDisable()
+        {
+            EventBus<ChangeTireEvent>.RemoveListener(ChangeTire);
+        }
+
+        private void ChangeTire(object sender, ChangeTireEvent @event)
+        {
+            ResetPlayerHealth();
+            ChangePlayerSpeed(@event.ChosenTire);
+        }
 
 
         public void DamagePlayer(float damage)
@@ -19,38 +35,39 @@ namespace Scripts.Player
             if (_playerHealth > 0)
             {
                 _playerHealth -= damage;
-                _playerManager.GameManager.Healthbar.SetHealth(_playerHealth);
+                GameManager.Instance.Healthbar.SetHealth(_playerHealth);
             }
             else
             {
-                _playerManager.OnDeath();
+                EventBus<PlayerDeathEvent>.Emit(this, new PlayerDeathEvent());
+                StopPlayerMovement();
             }
         }
 
-        public void ResetPlayerHealth()
+        private void ResetPlayerHealth()
         {
             _playerHealth = 100;
         }
 
-        public void ChangePlayerSpeed(Tire tire)
+        private void ChangePlayerSpeed(Tire tire)
         {
             switch (tire)
             {
                 case Tire.Soft:
-                    _playerSpeed = 2.5f;
+                    PlayerSpeed = 2.5f;
                     break;
                 case Tire.Medium:
-                    _playerSpeed = 2f;
+                    PlayerSpeed = 2f;
                     break;
                 case Tire.Hard:
-                    _playerSpeed = 1.5f;
+                    PlayerSpeed = 1.5f;
                     break;
             }
         }
 
-        public void StopPlayerMovement()
+        private void StopPlayerMovement()
         {
-            _playerSpeed = 0;
+            PlayerSpeed = 0;
         }
     }
 }

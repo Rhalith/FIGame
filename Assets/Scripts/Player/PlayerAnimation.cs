@@ -1,8 +1,5 @@
-using System;
-using DG.Tweening;
 using Scripts.EventBus;
 using Scripts.Events;
-using Scripts.Managers;
 using UnityEngine;
 
 namespace Scripts.Player

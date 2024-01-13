@@ -1,4 +1,3 @@
-using System;
 using Scripts.EventBus;
 using Scripts.Events;
 using Scripts.Masi;

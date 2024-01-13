@@ -1,4 +1,6 @@
 using System.Collections;
+using Scripts.EventBus;
+using Scripts.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,8 +12,6 @@ namespace Scripts.Menu
         [SerializeField] private AudioSource _audioSource;
         private float _duration;
 
-        [SerializeField] private UnityEvent onFinishSound;
-
         public void FinishAudio()
         {
             _duration = _audioSource.clip.length;
@@ -21,7 +21,8 @@ namespace Scripts.Menu
         private IEnumerator WaitForSound()
         {
             yield return new WaitForSeconds(_duration);
-            onFinishSound.Invoke();
+            EventBus<StartPitEnterEvent>.Emit(this, new StartPitEnterEvent());
+            gameObject.SetActive(false);
         }
     }
 }

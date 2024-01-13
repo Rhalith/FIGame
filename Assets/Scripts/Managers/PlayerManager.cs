@@ -62,7 +62,6 @@ namespace Scripts.Managers
         {
             if (@event.IsEntering)
             {
-                _animator.enabled = true;
                 DOTween.To(() => _scrollBackground.Speed, x => _scrollBackground.Speed = x, 0.2f, 1f);
             }
             else

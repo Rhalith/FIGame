@@ -41,6 +41,7 @@ namespace Scripts.Managers
         private void KillPlayer(object sender, PlayerDeathEvent @event)
         {
             DOTween.To(() => _scrollBackground.Speed, x => _scrollBackground.Speed = x, 0, 1f).OnComplete(() => _deathScreen.SetActive(true));
+            EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = true });
         }
 
         private void PitStop(object sender, PitStopEvent @event)
@@ -49,12 +50,15 @@ namespace Scripts.Managers
             {
                 ChangeBackGroundSpeed(0,1f);
                 _tireMenu.SetActive(true);
+                EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = true });
+                
             }
             else
             {
                 ChangeBackGroundSpeed(0.2f,1f);
                 _animator.SetBool("isTireSelected", true);
                 _tireMenu.SetActive(false);
+                EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = false });
             }
         }
 

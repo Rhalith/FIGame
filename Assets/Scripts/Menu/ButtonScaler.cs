@@ -25,7 +25,7 @@ namespace Scripts.Menu
         public void OnPointerExit(PointerEventData eventData)
         {
             // Return to normal size
-            ScaleToSize(_originalScale.x);
+            ScaleToSize(1.0f);
         }
         
         public void OnPointerClick(PointerEventData eventData)
@@ -42,7 +42,7 @@ namespace Scripts.Menu
         public void OnDeselect(BaseEventData eventData)
         {
             // Return to normal size
-            ScaleToSize(_originalScale.x);
+            ScaleToSize(1.0f);
         }
 
         private void ScaleToSize(float targetScale)

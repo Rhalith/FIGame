@@ -2,7 +2,6 @@ using System.Collections;
 using Scripts.EventBus;
 using Scripts.Events;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Scripts.Menu
 {

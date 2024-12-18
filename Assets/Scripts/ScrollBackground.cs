@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using Scripts.EventBus;
 using Scripts.Events;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Scripts

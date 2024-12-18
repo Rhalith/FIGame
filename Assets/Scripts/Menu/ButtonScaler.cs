@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Scripts.Menu
 {
-    public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, IPointerClickHandler
+    public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler, IPointerClickHandler, ISubmitHandler
     {
         [SerializeField] private float scaleFactor = 1.1f; // How much to scale up
         [SerializeField] private float scaleSpeed = 0.1f;  // Speed of scaling
@@ -32,6 +32,12 @@ namespace Scripts.Menu
         {
             transform.localScale = _originalScale;
         }
+        
+        public void OnSubmit(BaseEventData eventData)
+        {
+            transform.localScale = _originalScale;
+        }
+        
         
         public void OnSelect(BaseEventData eventData)
         {

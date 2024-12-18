@@ -75,11 +75,11 @@ namespace Scripts.Managers
         {
             if (@event.IsEntering)
             {
-                DOTween.To(() => _scrollBackground.Speed, x => _scrollBackground.Speed = x, 0.2f, 1f);
+                ChangeBackGroundSpeed(0.2f, 1f);
             }
             else
             {
-                DOTween.To(() => _scrollBackground.Speed, x => _scrollBackground.Speed = x, 0.4f, 1f);
+                ChangeBackGroundSpeed(0.4f, 1f);
                 _animator.SetBool("isTireSelected", false);
                 _animator.enabled = false;
             }

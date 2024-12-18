@@ -20,6 +20,7 @@ namespace Scripts.Menu
 
         private IEnumerator WaitForSound()
         {
+            EventBus<ResetCarPositionEvent>.Emit(this, new ResetCarPositionEvent());
             yield return new WaitForSeconds(_duration);
             EventBus<StartPitEnterEvent>.Emit(this, new StartPitEnterEvent());
             gameObject.SetActive(false);

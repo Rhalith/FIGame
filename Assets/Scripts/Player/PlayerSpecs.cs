@@ -5,68 +5,68 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-    public class PlayerSpecs : MonoBehaviour
-    {
-        private float _playerHealth = 100;
+   public class PlayerSpecs : MonoBehaviour
+   {
+      private float _playerHealth = 100;
 
-        public float PlayerSpeed { get; private set; }
-
-
-        private void OnEnable()
-        {
-            EventBus<ChangeTireEvent>.AddListener(ChangeTire);
-        }
-        
-        private void OnDisable()
-        {
-            EventBus<ChangeTireEvent>.RemoveListener(ChangeTire);
-        }
-
-        private void ChangeTire(object sender, ChangeTireEvent @event)
-        {
-            ResetPlayerHealth();
-            ChangePlayerSpeed(@event.ChosenTire);
-        }
+      public float PlayerSpeed { get; private set; }
 
 
-        public void DamagePlayer(float damage)
-        {
-            if (_playerHealth > 0)
-            {
-                _playerHealth -= damage;
-                GameManager.Instance.Healthbar.SetHealth(_playerHealth);
-            }
-            else
-            {
-                EventBus<PlayerDeathEvent>.Emit(this, new PlayerDeathEvent());
-                StopPlayerMovement();
-            }
-        }
+      private void OnEnable()
+      {
+         EventBus<ChangeTireEvent>.AddListener(ChangeTire);
+      }
 
-        private void ResetPlayerHealth()
-        {
-            _playerHealth = 100;
-        }
+      private void OnDisable()
+      {
+         EventBus<ChangeTireEvent>.RemoveListener(ChangeTire);
+      }
 
-        private void ChangePlayerSpeed(Tire tire)
-        {
-            switch (tire)
-            {
-                case Tire.Soft:
-                    PlayerSpeed = 2.5f;
-                    break;
-                case Tire.Medium:
-                    PlayerSpeed = 2f;
-                    break;
-                case Tire.Hard:
-                    PlayerSpeed = 1.5f;
-                    break;
-            }
-        }
+      private void ChangeTire(object sender, ChangeTireEvent @event)
+      {
+         ResetPlayerHealth();
+         ChangePlayerSpeed(@event.ChosenTire);
+      }
 
-        private void StopPlayerMovement()
-        {
-            PlayerSpeed = 0;
-        }
-    }
+
+      public void DamagePlayer(float damage)
+      {
+         if (_playerHealth > 0)
+         {
+            _playerHealth -= damage;
+            GameManager.Instance.Healthbar.SetHealth(_playerHealth);
+         }
+         else
+         {
+            EventBus<PlayerDeathEvent>.Emit(this, new PlayerDeathEvent());
+            StopPlayerMovement();
+         }
+      }
+
+      private void ResetPlayerHealth()
+      {
+         _playerHealth = 100;
+      }
+
+      private void ChangePlayerSpeed(Tire tire)
+      {
+         switch (tire)
+         {
+            case Tire.Soft:
+               PlayerSpeed = 2.5f;
+               break;
+            case Tire.Medium:
+               PlayerSpeed = 2f;
+               break;
+            case Tire.Hard:
+               PlayerSpeed = 1.5f;
+               break;
+         }
+      }
+
+      private void StopPlayerMovement()
+      {
+         PlayerSpeed = 0;
+      }
+   }
 }

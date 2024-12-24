@@ -8,7 +8,7 @@ namespace Scripts.Player
    public class PlayerSpecs : MonoBehaviour
    {
       private float _playerHealth = 100;
-
+      private float _damageRate;
       public float PlayerSpeed { get; private set; }
 
 
@@ -26,6 +26,7 @@ namespace Scripts.Player
       {
          ResetPlayerHealth();
          ChangePlayerSpeed(@event.ChosenTire);
+         ChangePlayerHealthRate(@event.ChosenTire);
       }
 
 
@@ -33,7 +34,7 @@ namespace Scripts.Player
       {
          if (_playerHealth > 0)
          {
-            _playerHealth -= damage;
+            _playerHealth -= damage * _damageRate;
             GameManager.Instance.Healthbar.SetHealth(_playerHealth);
          }
          else
@@ -60,6 +61,22 @@ namespace Scripts.Player
                break;
             case Tire.Hard:
                PlayerSpeed = 1.5f;
+               break;
+         }
+      }
+      
+      private void ChangePlayerHealthRate(Tire tire)
+      {
+         switch (tire)
+         {
+            case Tire.Soft:
+               _damageRate = 2f;
+               break;
+            case Tire.Medium:
+               _damageRate = 1.5f;
+               break;
+            case Tire.Hard:
+               _damageRate = 1f;
                break;
          }
       }

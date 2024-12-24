@@ -37,7 +37,7 @@ namespace Scripts.Player
             _playerHealth -= damage * _damageRate;
             EventBus<ChangeHealthEvent>.Emit(this, new ChangeHealthEvent {HealthChange = -damage * _damageRate});
          }
-         else
+         if (_playerHealth <= 0)
          {
             EventBus<PlayerDeathEvent>.Emit(this, new PlayerDeathEvent());
             StopPlayerMovement();

@@ -137,7 +137,7 @@ namespace Scripts.Managers
                     break;
             }
             EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = tire });
-            _healthbar.SetHealth(100);
+            EventBus<ChangeHealthEvent>.Emit(this, new ChangeHealthEvent { HealthChange = 100});
         }
 
         private void ChangeDriver(int i)

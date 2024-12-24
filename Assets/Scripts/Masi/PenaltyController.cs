@@ -17,40 +17,31 @@ namespace Scripts.Masi
       {
          int i = Random.Range(0, 5);
          int j = Random.Range(0, 2);
-
-         Penalty penaltyType;
-         Sprite penaltySprite;
+         
 
          switch (i)
          {
             case 1:
-               penaltyType = Penalty.TenSeconds;
-               penaltySprite = _tenSecondSprites[j];
-               break;
-            case 2:
-               penaltyType = Penalty.PowerUp;
-               penaltySprite = powerUpSprites[j];
+               penalty.ChangePenalty(Penalty.TenSeconds, _tenSecondSprites[j]);
                break;
             default:
-               penaltyType = Penalty.FiveSeconds;
-               penaltySprite = _fiveSecondSprites[j];
+               penalty.ChangePenalty(Penalty.FiveSeconds, _fiveSecondSprites[j]);
                break;
          }
-
-         penalty.ChangePenalty(penaltyType, penaltySprite);
+         
       }
       public PenaltyHit GetPooledObject()
       {
          for (int i = 0; i < _penaltyHits.Count; i++)
          {
-            if (!((PenaltyHit)_penaltyHits[i]).gameObject.activeInHierarchy)
+            if (!_penaltyHits[i].gameObject.activeInHierarchy)
             {
                PreparePenalty(_penaltyHits[i]);
-               return (PenaltyHit)_penaltyHits[i];
+               return _penaltyHits[i];
             }
          }
 
-         GameObject obj = (GameObject)Instantiate(_penaltyPrefab);
+         GameObject obj = Instantiate(_penaltyPrefab);
          PenaltyHit objPenaltyHit = obj.GetComponent<PenaltyHit>();
          _penaltyHits.Add(objPenaltyHit);
          return objPenaltyHit;

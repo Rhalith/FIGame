@@ -35,7 +35,7 @@ namespace Scripts.Player
          if (_playerHealth > 0)
          {
             _playerHealth -= damage * _damageRate;
-            GameManager.Instance.Healthbar.SetHealth(_playerHealth);
+            EventBus<ChangeHealthEvent>.Emit(this, new ChangeHealthEvent {HealthChange = -damage * _damageRate});
          }
          else
          {

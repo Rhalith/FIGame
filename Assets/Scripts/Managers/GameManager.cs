@@ -83,6 +83,7 @@ namespace Scripts.Managers
 
         public void SetupGame(bool isMax)
         {
+            EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = Tire.Soft });
             if (isMax)
             {
                 ChangeDriver(0);

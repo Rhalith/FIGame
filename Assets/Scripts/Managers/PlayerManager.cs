@@ -83,6 +83,7 @@ namespace Scripts.Managers
                 _animator.SetBool("isTireSelected", false);
                 _animator.enabled = false;
                 EventBus<SongPlayEvent>.Emit(this, new SongPlayEvent { ShouldPlay = true });
+                EventBus<StartTimerEvent>.Emit(this, new StartTimerEvent());
             }
         }
 

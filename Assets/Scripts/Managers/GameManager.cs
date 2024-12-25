@@ -40,6 +40,7 @@ namespace Scripts.Managers
         [SerializeField] private AudioClip _hamiltonRadio;
         [SerializeField] private TMP_Text _driverText;
         [SerializeField] private AudioFinish _audioFinish;
+        [SerializeField] private TMP_Text _timerText;
         #endregion
         #region Managers
         [Header("Managers")]
@@ -154,20 +155,29 @@ namespace Scripts.Managers
 
         private void ChangeDriverRadio(int i)
         {
+            SetDriverSettings(i);
+            _audioSource.Play();
+            _audioFinish.FinishAudio();
+        }
+
+        private void SetDriverSettings(int i)
+        {
             if (i == 0)
             {
                 _audioSource.clip = _verstappenRadio;
                 _driverText.text = "VERSTAPPEN";
-                _driverText.color = new Color(0.282353f, 0.4431373f, 0.7176471f);
+                var color = new Color(0.282353f, 0.4431373f, 0.7176471f);
+                _driverText.color = color;
+                _timerText.color = color;
             }
             else
             {
                 _audioSource.clip = _hamiltonRadio;
                 _driverText.text = "HAMILTON";
-                _driverText.color = new Color(0.4705883f, 0.8039216f, 0.7450981f);
+                var color = new Color(0.4705883f, 0.8039216f, 0.7450981f);
+                _driverText.color = color;
+                _timerText.color = color;
             }
-            _audioSource.Play();
-            _audioFinish.FinishAudio();
         }
     }
 

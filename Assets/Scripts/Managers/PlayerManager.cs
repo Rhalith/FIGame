@@ -82,7 +82,7 @@ namespace Scripts.Managers
                 ChangeBackGroundSpeed(0.4f, 1f);
                 _animator.SetBool("isTireSelected", false);
                 _animator.enabled = false;
-                EventBus<SongPlayEvent>.Emit(this, new SongPlayEvent { ShouldPlay = true });
+                EventBus<PlaySongEvent>.Emit(this, new PlaySongEvent());
                 EventBus<StartTimerEvent>.Emit(this, new StartTimerEvent());
             }
         }

@@ -21,40 +21,45 @@ namespace Scripts.Managers
         private string _currentMusicName;
         private string _displayedText;
         private int _scrollIndex;
+        private bool _canChange;
+        private bool _shouldPlay;
 
 
         private void OnEnable()
         {
-            EventBus<SongPlayEvent>.AddListener(PlaySong);
-        }
-        
-        private void OnDisable()
-        {
-            EventBus<SongPlayEvent>.RemoveListener(PlaySong);
+            EventBus<PlaySongEvent>.AddListener(PlaySong);
+            EventBus<PlayerDeathEvent>.AddListener(StopSong);
         }
 
-        private void PlaySong(object sender, SongPlayEvent @event)
+        private void OnDisable()
         {
-            if(@event.ShouldPlay)
-            {
-                PlayRandomMusic();
-                _radioText.enabled = true;
-                InitializeDisplayedText();
-            
-                InvokeRepeating(nameof(UpdateDisplayedText), _updateInterval, _updateInterval);
-            }
-            else
-            {
-                _audioSource.Stop();
-                _radioText.enabled = false;
-                CancelInvoke(nameof(UpdateDisplayedText));
-            }
+            EventBus<PlaySongEvent>.RemoveListener(PlaySong);
+            EventBus<PlayerDeathEvent>.RemoveListener(StopSong);
+        }
+
+        private void PlaySong(object sender, PlaySongEvent @event)
+        {
+            PlayRandomMusic();
+            _radioText.enabled = true;
+            InitializeDisplayedText();
+            _canChange = true;
+            _shouldPlay = true;
+            InvokeRepeating(nameof(UpdateDisplayedText), _updateInterval, _updateInterval);
+        }
+
+        private void StopSong(object sender, PlayerDeathEvent @event)
+        {
+            _canChange = false;
+            _shouldPlay = false;
+            _audioSource.Stop();
+            _radioText.enabled = false;
+            CancelInvoke(nameof(UpdateDisplayedText));
         }
 
         private void Update()
         {
             // Check if the current song has finished playing
-            if (!_audioSource.isPlaying && _audioSource.clip != null)
+            if (!_audioSource.isPlaying && _audioSource.clip != null && _shouldPlay)
             {
                 PlayRandomMusic();
                 InitializeDisplayedText();
@@ -117,26 +122,23 @@ namespace Scripts.Managers
                 // Simple substring if the range doesn't wrap
                 return _displayedText.Substring(_scrollIndex, _visibleCharacters);
             }
-            else
-            {
                 // Wrap around to the beginning of the text
-                string part1 = _displayedText.Substring(_scrollIndex);
-                string part2 = _displayedText.Substring(0, endIndex);
-                return part1 + part2;
-            }
+            string part1 = _displayedText.Substring(_scrollIndex);
+            string part2 = _displayedText.Substring(0, endIndex);
+            return part1 + part2;
         }
-        
-        public void ChangeSong() 
+
+        public void OnChangeSong()
         {
+            if(!_canChange) return;
             int currentSongIndex = _musicClips.IndexOf(_audioSource.clip);
             int nextSongIndex = (currentSongIndex + 1) % _musicClips.Count;
-            
+
             _audioSource.clip = _musicClips[nextSongIndex];
             _currentMusicName = _musicClips[nextSongIndex].name.ToUpper();
             _audioSource.Play();
-            
+
             InitializeDisplayedText();
         }
-
     }
 }

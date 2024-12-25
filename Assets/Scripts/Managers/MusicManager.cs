@@ -75,7 +75,7 @@ namespace Scripts.Managers
             _currentMusicName = FormatSongName(_currentMusicName);
 
             // Padding spaces to simulate a looping effect
-            _displayedText = $"{_currentMusicName}    {_currentMusicName}";
+            _displayedText = $"{_currentMusicName}    {_currentMusicName}    ";
             _scrollIndex = 0; // Reset scrolling index
         }
 

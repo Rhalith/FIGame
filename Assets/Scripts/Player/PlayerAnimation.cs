@@ -21,6 +21,7 @@ namespace Scripts.Player
         private void StartPitEnter(object sender, StartPitEnterEvent @event)
         {
             animator.enabled = true;
+            animator.SetTrigger("startPit");
         }
 
         public void EnterPitLane()

@@ -2,6 +2,7 @@ using Scripts.EventBus;
 using Scripts.Events;
 using Scripts.Managers;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Scripts.Player
 {
@@ -15,11 +16,18 @@ namespace Scripts.Player
       private void OnEnable()
       {
          EventBus<ChangeTireEvent>.AddListener(ChangeTire);
+         EventBus<TimeEndEvent>.AddListener(UpdateScore);
       }
 
       private void OnDisable()
       {
          EventBus<ChangeTireEvent>.RemoveListener(ChangeTire);
+         EventBus<TimeEndEvent>.RemoveListener(UpdateScore);
+      }
+
+      private void UpdateScore(object sender, TimeEndEvent @event)
+      {
+         EventBus<UpdateScoreEvent>.Emit(this, new UpdateScoreEvent {ScoreChange = _playerHealth});
       }
 
       private void ChangeTire(object sender, ChangeTireEvent @event)

@@ -13,8 +13,6 @@ namespace Scripts.Masi
       [SerializeField] private float _speed;
 
       public Vector2 moveDirection;
-      public float Speed { get => _speed; set => _speed = value; }
-
       public void ChangePenalty(Penalty penalty, Sprite sprite)
       {
          switch (penalty)
@@ -34,7 +32,7 @@ namespace Scripts.Masi
       public void Shoot(Transform target)
       {
          gameObject.SetActive(true);
-         moveDirection = (target.localPosition - transform.localPosition).normalized * _speed * 500;
+         moveDirection = (target.localPosition - transform.localPosition).normalized * (_speed * 500);
          _rigidBody.velocity = moveDirection;
       }
 

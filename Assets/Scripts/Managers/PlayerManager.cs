@@ -10,9 +10,7 @@ namespace Scripts.Managers
     {
         #region Player Scripts
 
-        [Header("Player Scripts")] [SerializeField]
-        private PlayerAnimation _playerAnimation;
-
+        [Header("Player Scripts")] 
         [SerializeField] private PlayerMovement _playerMovement;
 
         #endregion

@@ -15,6 +15,7 @@ namespace Scripts.Player
         private Vector2 _startPosition;
         
         private bool _shouldReset;
+        private bool _canMove;
         
         private void Start()
         {
@@ -24,11 +25,25 @@ namespace Scripts.Player
         private void OnEnable()
         {
             EventBus<ResetCarPositionEvent>.AddListener(ResetCarPosition);
+            EventBus<StartTimerEvent>.AddListener(StartMovement);
+            EventBus<TimeEndEvent>.AddListener(StopMovement);
         }
         
         private void OnDisable()
         {
             EventBus<ResetCarPositionEvent>.RemoveListener(ResetCarPosition);
+            EventBus<StartTimerEvent>.RemoveListener(StartMovement);
+            EventBus<TimeEndEvent>.RemoveListener(StopMovement);
+        }
+
+        private void StartMovement(object sender, StartTimerEvent @event)
+        {
+            _canMove = true;
+        }
+
+        private void StopMovement(object sender, TimeEndEvent @event)
+        {
+            _canMove = false;
         }
 
         private void ResetCarPosition(object sender, ResetCarPositionEvent @event)
@@ -55,7 +70,8 @@ namespace Scripts.Player
             }
             else
             {
-                _rigidbody.velocity = new Vector2(_movement.x, _movement.y) * (_playerSpecs.PlayerSpeed * 200);
+                if(!_canMove) _rigidbody.velocity = Vector2.zero;
+                else _rigidbody.velocity = new Vector2(_movement.x, _movement.y) * (_playerSpecs.PlayerSpeed * 200);
             }
         }
     }

@@ -33,6 +33,10 @@ namespace Scripts.Menu
             {
                 _health = 0;
             }
+            if(_health > 100)
+            {
+                _health = 100;
+            }
             SetHealth(_health);
             ChangeHealthText(@event.HealthChange);
         }

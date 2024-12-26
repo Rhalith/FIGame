@@ -37,6 +37,7 @@ namespace Scripts.Managers
 
         private void PlaySong(object sender, PlaySongEvent @event)
         {
+            if(_audioSource.isPlaying) return;
             PlayRandomMusic();
             _radioText.enabled = true;
             InitializeDisplayedText();

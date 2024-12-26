@@ -24,11 +24,12 @@ namespace Scripts.Masi
         }
 
 
-        IEnumerator Shooting()
+        private IEnumerator Shooting()
         {
             while (_shooting)
             {
                 yield return new WaitForSeconds(1 / _fireRate);
+                if (!_shooting) yield break;
                 _penaltyController.GetPooledObject().Shoot(_target.transform);
             }
         }

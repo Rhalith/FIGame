@@ -79,7 +79,11 @@ namespace Scripts.Managers
             sequence.AppendInterval(0.5f);
 
             // Show the score panel after animation
-            sequence.AppendCallback(() => _scorePanel.SetActive(true));
+            sequence.AppendCallback(() =>
+            {
+                _scorePanel.SetActive(true);
+                EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = true });
+            });
         }
 
         private void CheckAndUpdateMaxScore()

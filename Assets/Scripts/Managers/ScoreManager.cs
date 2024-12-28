@@ -98,6 +98,7 @@ namespace Scripts.Managers
 
         public void ResetTextPosition()
         {
+            EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = false });
             _scoreTextTransform.localPosition = _originalPosition;
         }
     }

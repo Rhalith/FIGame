@@ -39,7 +39,6 @@ namespace Scripts.Player
 
       private void ChangeTire(object sender, ChangeTireEvent @event)
       {
-         Debug.Log("Changed tire");
          ChangePlayerSpeed(@event.ChosenTire);
          ChangePlayerHealthRate(@event.ChosenTire);
       }

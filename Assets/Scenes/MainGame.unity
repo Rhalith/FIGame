@@ -1574,7 +1574,7 @@ MonoBehaviour:
   speed: 3
   maxY: -370
   minY: 370
-  _startPosition: {x: 400, y: 0}
+  _startPosition: {x: 450, y: 0}
   _endPosition: {x: -50, y: 0}
 --- !u!114 &262748656
 MonoBehaviour:
@@ -13416,7 +13416,9 @@ MonoBehaviour:
   _tenSecondSprites:
   - {fileID: 21300000, guid: 7f80bdf3d3564ac43a0b04bd22054726, type: 3}
   - {fileID: 21300000, guid: 521ef84f82d2c4f4ca05ba1480ead767, type: 3}
-  powerUpSprites: []
+  powerUpSprites:
+  - {fileID: 21300000, guid: 5a6dbc398d87c9f47bc7b5bab94ccc90, type: 3}
+  - {fileID: 21300000, guid: 4475001c5722316469abe604839b4408, type: 3}
 --- !u!1 &1810816020
 GameObject:
   m_ObjectHideFlags: 0

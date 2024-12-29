@@ -13,17 +13,43 @@ namespace Scripts.Managers
 
         private float _remainingTime; // Time remaining in seconds
         private Coroutine _countdownCoroutine; // Reference to the running coroutine
+        private bool _isPaused; // To track if the timer is paused
 
         private void OnEnable()
         {
             EventBus<StartTimerEvent>.AddListener(StartTimer);
             EventBus<PlayerDeathEvent>.AddListener(StopTimer);
+            EventBus<CallSafetyCarEvent>.AddListener(PauseTimer);
+            EventBus<SendSafetyCarEvent>.AddListener(ResumeTimer);
         }
 
         private void OnDisable()
         {
             EventBus<StartTimerEvent>.RemoveListener(StartTimer);
             EventBus<PlayerDeathEvent>.RemoveListener(StopTimer);
+            EventBus<CallSafetyCarEvent>.RemoveListener(PauseTimer);
+            EventBus<SendSafetyCarEvent>.RemoveListener(ResumeTimer);
+        }
+
+        private void PauseTimer(object sender, CallSafetyCarEvent @event)
+        {
+            if (!_isPaused && _countdownCoroutine != null)
+            {
+                _timerText.enabled = false;
+                _isPaused = true;
+                StopCoroutine(_countdownCoroutine); // Stop the coroutine to pause the timer
+                _countdownCoroutine = null;
+            }
+        }
+
+        private void ResumeTimer(object sender, SendSafetyCarEvent @event)
+        {
+            if (_isPaused)
+            {
+                _timerText.enabled = true;
+                _isPaused = false;
+                _countdownCoroutine = StartCoroutine(CountdownTimer()); // Restart the timer coroutine
+            }
         }
 
         private void StartTimer(object sender, StartTimerEvent @event)
@@ -49,9 +75,16 @@ namespace Scripts.Managers
         {
             while (_remainingTime > 0)
             {
-                yield return null; // Wait for the next frame
-                _remainingTime -= Time.deltaTime;
-                UpdateTimerText();
+                if (!_isPaused)
+                {
+                    yield return null; // Wait for the next frame
+                    _remainingTime -= Time.deltaTime;
+                    UpdateTimerText();
+                }
+                else
+                {
+                    yield return null; // Allow coroutine to continue without decrementing time
+                }
             }
 
             _remainingTime = 0;

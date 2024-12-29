@@ -72,7 +72,7 @@ namespace Scripts.Masi
       }
       IEnumerator DisableObject()
       {
-         yield return new WaitForSeconds(1f);
+         yield return new WaitForSeconds(5/ _speed);
          gameObject.SetActive(false);
       }
 

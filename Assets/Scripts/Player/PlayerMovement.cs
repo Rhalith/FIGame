@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Scripts.EventBus;
 using Scripts.Events;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,8 @@ namespace Scripts.Player
             EventBus<ResetCarPositionEvent>.AddListener(ResetCarPosition);
             EventBus<StartTimerEvent>.AddListener(StartMovement);
             EventBus<TimeEndEvent>.AddListener(StopMovement);
+            EventBus<CallSafetyCarEvent>.AddListener(StopMovement);
+            EventBus<StartSafetyCarEvent>.AddListener(StartMovement);
         }
         
         private void OnDisable()
@@ -34,6 +37,18 @@ namespace Scripts.Player
             EventBus<ResetCarPositionEvent>.RemoveListener(ResetCarPosition);
             EventBus<StartTimerEvent>.RemoveListener(StartMovement);
             EventBus<TimeEndEvent>.RemoveListener(StopMovement);
+            EventBus<CallSafetyCarEvent>.RemoveListener(StopMovement);
+            EventBus<StartSafetyCarEvent>.RemoveListener(StartMovement);
+        }
+
+        private void StopMovement(object sender, CallSafetyCarEvent @event)
+        {
+            _canMove = false;
+        }
+
+        private void StartMovement(object sender, StartSafetyCarEvent @event)
+        {
+            _canMove = true;
         }
 
         private void StartMovement(object sender, StartTimerEvent @event)

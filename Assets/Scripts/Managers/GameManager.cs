@@ -47,7 +47,6 @@ namespace Scripts.Managers
         [SerializeField] private AudioClip _hamiltonRadio;
         [SerializeField] private TMP_Text _driverText;
         [SerializeField] private AudioFinish _audioFinish;
-        [SerializeField] private TMP_Text _timerText;
 
         #endregion
 
@@ -55,6 +54,7 @@ namespace Scripts.Managers
 
         [Header("Managers")] [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private MasiManager _masiManager;
+        [SerializeField] private TimerManager _timerManager;
 
         #endregion
 
@@ -200,7 +200,7 @@ namespace Scripts.Managers
                 _driverText.text = "VERSTAPPEN";
                 var color = new Color(0.282353f, 0.4431373f, 0.7176471f);
                 _driverText.color = color;
-                _timerText.color = color;
+                _timerManager.ChangeTimerColor(color);
             }
             else
             {
@@ -208,7 +208,7 @@ namespace Scripts.Managers
                 _driverText.text = "HAMILTON";
                 var color = new Color(0.4705883f, 0.8039216f, 0.7450981f);
                 _driverText.color = color;
-                _timerText.color = color;
+                _timerManager.ChangeTimerColor(color);
             }
         }
 

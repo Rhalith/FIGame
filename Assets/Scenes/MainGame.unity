@@ -11927,9 +11927,9 @@ MonoBehaviour:
   _hamiltonRadio: {fileID: 8300000, guid: 24dea23410e39704a93580fb71afd5fb, type: 3}
   _driverText: {fileID: 1249639095}
   _audioFinish: {fileID: 69530409}
-  _timerText: {fileID: 320755389}
   _playerManager: {fileID: 1984629238}
   _masiManager: {fileID: 1039170875}
+  _timerManager: {fileID: 416230735}
   _deathScreen: {fileID: 1486563086}
   _mainGame: {fileID: 1627342623}
   _mainMenu: {fileID: 574078559}

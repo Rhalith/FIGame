@@ -107,6 +107,18 @@ namespace Scripts.Managers
             }
         }
 
+        private void ResetTimer()
+        {
+            _remainingTime = _time;
+            UpdateTimerText();
+        }
+        
+        public void ChangeTimerColor(Color color)
+        {
+            _timerText.color = color;
+            ResetTimer();
+        }
+
         private void OnTimerEnd()
         {
             EventBus<TimeEndEvent>.Emit(this, new TimeEndEvent());

@@ -75,7 +75,7 @@ namespace Scripts.Managers
         {
             while (_remainingTime > 0)
             {
-                if (!_isPaused)
+                if (!_isPaused && !GameManager.Instance.IsGameFinished)
                 {
                     yield return null; // Wait for the next frame
                     _remainingTime -= Time.deltaTime;
@@ -96,12 +96,10 @@ namespace Scripts.Managers
         {
             if (_remainingTime <= 10)
             {
-                // Display seconds and split seconds
                 _timerText.text = $"{_remainingTime:F2} s";
             }
             else
             {
-                // Display only seconds
                 int seconds = Mathf.CeilToInt(_remainingTime);
                 _timerText.text = $"{seconds} s";
             }

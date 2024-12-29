@@ -1,5 +1,6 @@
 ﻿using Scripts.EventBus;
 using Scripts.Events;
+using Scripts.Managers;
 using UnityEngine;
 
 namespace Scripts.SafetyCar
@@ -85,7 +86,6 @@ namespace Scripts.SafetyCar
       {
          if (_movingToEnd)
          {
-            // When reaching the end point, emit SendSafetyCarEvent and start moving to the start position
             _movingToEnd = false;
             _movingToStart = true;
             _currentTarget = new Vector3(_startPosition.x, _startPosition.y, transform.localPosition.z);
@@ -94,13 +94,11 @@ namespace Scripts.SafetyCar
          }
          else if (_movingToStart)
          {
-            // Stop movement once the safety car reaches the start position
             _shouldMove = false;
             _movingToStart = false;
          }
          else if (_oscillating)
          {
-            // Oscillation logic
             _currentTarget = new Vector3(transform.localPosition.x, _currentTarget.y == maxY ? minY : maxY, transform.localPosition.z);
          }
       }

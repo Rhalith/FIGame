@@ -52,7 +52,7 @@ namespace Scripts.Managers
 
       private void StartComing(object sender, PitLaneEntranceEvent @event)
       {
-         if (!@event.IsEntering)
+         if (!@event.IsEntering && !GameManager.Instance.IsGameFinished)
          {
             StartComing();
          }
@@ -60,7 +60,8 @@ namespace Scripts.Managers
 
       private void StartComing()
       {
-         _masiAnimation.StartComing();
+         if(!GameManager.Instance.IsGameFinished)
+            _masiAnimation.StartComing();
       }
 
       private void StartGoing()
@@ -69,6 +70,7 @@ namespace Scripts.Managers
       }
       public void StartAttack()
       {
+         if(GameManager.Instance.IsGameFinished) return;
          _masiAttack.StartShooting();
          _masiAnimation.StartFire();
          EventBus<ChangeSafetyCarStatusEvent>.Emit(this, new ChangeSafetyCarStatusEvent { CanSafetyCarBeDeployed = true });

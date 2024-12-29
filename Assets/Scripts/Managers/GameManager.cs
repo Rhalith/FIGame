@@ -70,10 +70,11 @@ namespace Scripts.Managers
       #endregion
 
       #region Getters & Setters
-
-      public Healthbar Healthbar
+      
+      public bool IsGameFinished
       {
-         get => _healthbar;
+         get => _isGameFinished;
+         set => _isGameFinished = value;
       }
 
       public static GameManager Instance { get; private set; }
@@ -82,6 +83,8 @@ namespace Scripts.Managers
 
       private bool _isSetup;
       private bool _isMax;
+      private bool _isGameFinished;
+
 
       private void Awake()
       {
@@ -129,6 +132,7 @@ namespace Scripts.Managers
          _scrollBackground.Speed = 0.4f;
          _mainGame.SetActive(false);
          _mainMenu.SetActive(true);
+         _isGameFinished = false;
       }
 
       public void ContinueGame()

@@ -51,6 +51,7 @@ namespace Scripts.Player
          if (_playerHealth <= 0)
          {
             EventBus<PlayerDeathEvent>.Emit(this, new PlayerDeathEvent());
+            GameManager.Instance.IsGameFinished = true;
             StopPlayerMovement();
          }
       }

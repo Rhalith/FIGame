@@ -16,25 +16,34 @@ namespace Scripts.Masi
       [SerializeField] List<Sprite> _fiveSecondSprites;
       [SerializeField] List<Sprite> _tenSecondSprites;
       [SerializeField] List<Sprite> powerUpSprites;
-      
-      private bool _canShoot;
 
       private void OnEnable()
       {
          EventBus<TimeEndEvent>.AddListener(StopPenalty);
+         EventBus<CallSafetyCarEvent>.AddListener(StopPenalty);
       }
       
       private void OnDisable()
       {
          EventBus<TimeEndEvent>.RemoveListener(StopPenalty);
+         EventBus<CallSafetyCarEvent>.RemoveListener(StopPenalty);
       }
-      
+
+      private void StopPenalty(object sender, CallSafetyCarEvent @event)
+      {
+         DisablePenalties();
+      }
       
       private void StopPenalty(object sender, TimeEndEvent @event)
       {
-         for (int i = 0; i < _penaltyHits.Count; i++)
+         DisablePenalties();
+      }
+
+      private void DisablePenalties()
+      {
+         foreach (var penalty in _penaltyHits)
          {
-            _penaltyHits[i].gameObject.SetActive(false);
+            penalty.gameObject.SetActive(false);
          }
       }
 

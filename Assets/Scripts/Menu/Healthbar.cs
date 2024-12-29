@@ -45,7 +45,7 @@ namespace Scripts.Menu
       private void ChangeHealthText(float healthChange)
       {
          _healthText.text = _health.ToString();
-         if (healthChange <= 0)
+         if (healthChange < 0)
          {
             _animator.SetTrigger("damage");
          }

@@ -1,229 +1,228 @@
-using System.Collections;
 using Scripts.EventBus;
 using Scripts.Events;
 using Scripts.Menu;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Scripts.Managers
 {
-    public class GameManager : MonoBehaviour
-    {
-        #region Car
+   public class GameManager : MonoBehaviour
+   {
+      #region Car
 
-        [Header("Car")] [SerializeField] private Image _car;
-        [SerializeField] private Sprite _maxCarSprite;
-        [SerializeField] private Sprite _lewisCarSprite;
+      [Header("Car")][SerializeField] private Image _car;
+      [SerializeField] private Sprite _maxCarSprite;
+      [SerializeField] private Sprite _lewisCarSprite;
 
-        #endregion
+      #endregion
 
-        #region CarTyre
+      #region CarTyre
 
-        [Header("CarTyre")] [SerializeField] private Image _tyre;
-        [SerializeField] private Sprite _softTyreSprite;
-        [SerializeField] private Sprite _mediumTyreSprite;
-        [SerializeField] private Sprite _hardTyreSprite;
+      [Header("CarTyre")][SerializeField] private Image _tyre;
+      [SerializeField] private Sprite _softTyreSprite;
+      [SerializeField] private Sprite _mediumTyreSprite;
+      [SerializeField] private Sprite _hardTyreSprite;
 
-        #endregion
+      #endregion
 
-        #region HealthBar
+      #region HealthBar
 
-        [Header("HealthBar")] [SerializeField] private Image _tyreLogo;
-        [SerializeField] private Image _healthbarImage;
-        [SerializeField] private Sprite _maxHealthbarSprite;
-        [SerializeField] private Sprite _lewisHealthbarSprite;
-        [SerializeField] private Sprite _softTyreLogoSprite;
-        [SerializeField] private Sprite _mediumTyreLogoSprite;
-        [SerializeField] private Sprite _hardTyreLogoSprite;
-        [SerializeField] private Healthbar _healthbar;
+      [Header("HealthBar")][SerializeField] private Image _tyreLogo;
+      [SerializeField] private Image _healthbarImage;
+      [SerializeField] private Sprite _maxHealthbarSprite;
+      [SerializeField] private Sprite _lewisHealthbarSprite;
+      [SerializeField] private Sprite _softTyreLogoSprite;
+      [SerializeField] private Sprite _mediumTyreLogoSprite;
+      [SerializeField] private Sprite _hardTyreLogoSprite;
+      [SerializeField] private Healthbar _healthbar;
 
-        #endregion
+      #endregion
 
-        #region RadioBar
+      #region RadioBar
 
-        [Header("RadioBar")] [SerializeField] private AudioSource _audioSource;
-        [SerializeField] private AudioClip _verstappenRadio;
-        [SerializeField] private AudioClip _hamiltonRadio;
-        [SerializeField] private TMP_Text _driverText;
-        [SerializeField] private AudioFinish _audioFinish;
+      [Header("RadioBar")][SerializeField] private AudioSource _audioSource;
+      [SerializeField] private AudioClip _verstappenRadio;
+      [SerializeField] private AudioClip _hamiltonRadio;
+      [SerializeField] private TMP_Text _driverText;
+      [SerializeField] private AudioFinish _audioFinish;
 
-        #endregion
+      #endregion
 
-        #region Managers
+      #region Managers
 
-        [Header("Managers")] [SerializeField] private PlayerManager _playerManager;
-        [SerializeField] private MasiManager _masiManager;
-        [SerializeField] private TimerManager _timerManager;
+      [Header("Managers")][SerializeField] private PlayerManager _playerManager;
+      [SerializeField] private MasiManager _masiManager;
+      [SerializeField] private TimerManager _timerManager;
 
-        #endregion
+      #endregion
 
-        #region Restart Properties
+      #region Restart Properties
 
-        [SerializeField] private GameObject _deathScreen;
-        [SerializeField] private GameObject _mainGame;
-        [SerializeField] private GameObject _mainMenu;
-        [SerializeField] private ScrollBackground _scrollBackground;
+      [SerializeField] private GameObject _deathScreen;
+      [SerializeField] private GameObject _mainGame;
+      [SerializeField] private GameObject _mainMenu;
+      [SerializeField] private ScrollBackground _scrollBackground;
 
-        #endregion
+      #endregion
 
-        #region Getters & Setters
+      #region Getters & Setters
 
-        public Healthbar Healthbar
-        {
-            get => _healthbar;
-        }
+      public Healthbar Healthbar
+      {
+         get => _healthbar;
+      }
 
-        public static GameManager Instance { get; private set; }
+      public static GameManager Instance { get; private set; }
 
-        #endregion
+      #endregion
 
-        private bool _isSetup;
-        private bool _isMax;
+      private bool _isSetup;
+      private bool _isMax;
 
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
+      private void Awake()
+      {
+         if (Instance == null)
+         {
+            Instance = this;
+         }
+         else
+         {
+            Destroy(gameObject);
+         }
+      }
 
 
-        private void OnEnable()
-        {
-            if (!_isSetup)
-            {
-                SetupGame(false);
-            }
-        }
+      private void OnEnable()
+      {
+         if (!_isSetup)
+         {
+            SetupGame(false);
+         }
+      }
 
-        public void SetupGame(bool isMax)
-        {
-            EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = Tire.Soft });
-            if (isMax)
-            {
-                ChangeDriver(0);
-                ChangeHealthBarImage(0);
-                ChangeDriverRadio(0);
-            }
-            else
-            {
-                ChangeDriver(1);
-                ChangeHealthBarImage(1);
-                ChangeDriverRadio(1);
-            }
+      public void SetupGame(bool isMax)
+      {
+         EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = Tire.Soft });
+         if (isMax)
+         {
+            ChangeDriver(0);
+            ChangeHealthBarImage(0);
+            ChangeDriverRadio(0);
+         }
+         else
+         {
+            ChangeDriver(1);
+            ChangeHealthBarImage(1);
+            ChangeDriverRadio(1);
+         }
 
-            _isSetup = true;
-        }
+         _isSetup = true;
+      }
 
-        public void ResetGame()
-        {
-            _audioFinish.gameObject.SetActive(true);
-            _scrollBackground.Speed = 0.4f;
-            _mainGame.SetActive(false);
-            _mainMenu.SetActive(true);
-        }
+      public void ResetGame()
+      {
+         _audioFinish.gameObject.SetActive(true);
+         _scrollBackground.Speed = 0.4f;
+         _mainGame.SetActive(false);
+         _mainMenu.SetActive(true);
+      }
 
-        public void ContinueGame()
-        {
-            _scrollBackground.Speed = 0.4f;
-            StartCoroutine(ContinueGameCoroutine());
-        }
+      public void ContinueGame()
+      {
+         _scrollBackground.Speed = 0.4f;
+         StartCoroutine(ContinueGameCoroutine());
+      }
 
-        public void SetTyre(string tire)
-        {
-            switch (tire)
-            {
-                case "soft":
-                    ChangeTyre(Tire.Soft);
-                    break;
-                case "medium":
-                    ChangeTyre(Tire.Medium);
-                    break;
-                case "hard":
-                    ChangeTyre(Tire.Hard);
-                    break;
-            }
-        }
+      public void SetTyre(string tire)
+      {
+         switch (tire)
+         {
+            case "soft":
+               ChangeTyre(Tire.Soft);
+               break;
+            case "medium":
+               ChangeTyre(Tire.Medium);
+               break;
+            case "hard":
+               ChangeTyre(Tire.Hard);
+               break;
+         }
+      }
 
-        private void ChangeTyre(Tire tire)
-        {
-            switch (tire)
-            {
-                case Tire.Soft:
-                    _tyre.sprite = _softTyreSprite;
-                    _tyreLogo.sprite = _softTyreLogoSprite;
-                    break;
-                case Tire.Medium:
-                    _tyre.sprite = _mediumTyreSprite;
-                    _tyreLogo.sprite = _mediumTyreLogoSprite;
-                    break;
-                case Tire.Hard:
-                    _tyre.sprite = _hardTyreSprite;
-                    _tyreLogo.sprite = _hardTyreLogoSprite;
-                    break;
-            }
+      private void ChangeTyre(Tire tire)
+      {
+         switch (tire)
+         {
+            case Tire.Soft:
+               _tyre.sprite = _softTyreSprite;
+               _tyreLogo.sprite = _softTyreLogoSprite;
+               break;
+            case Tire.Medium:
+               _tyre.sprite = _mediumTyreSprite;
+               _tyreLogo.sprite = _mediumTyreLogoSprite;
+               break;
+            case Tire.Hard:
+               _tyre.sprite = _hardTyreSprite;
+               _tyreLogo.sprite = _hardTyreLogoSprite;
+               break;
+         }
 
-            EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = tire });
-            EventBus<ChangeHealthEvent>.Emit(this, new ChangeHealthEvent { HealthChange = 100 });
-        }
+         EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = tire });
+      }
 
-        private void ChangeDriver(int i)
-        {
-            if (i == 0) _car.sprite = _maxCarSprite;
-            else _car.sprite = _lewisCarSprite;
-        }
+      private void ChangeDriver(int i)
+      {
+         if (i == 0) _car.sprite = _maxCarSprite;
+         else _car.sprite = _lewisCarSprite;
+      }
 
-        private void ChangeHealthBarImage(int i)
-        {
-            if (i == 0) _healthbarImage.sprite = _maxHealthbarSprite;
-            else _healthbarImage.sprite = _lewisHealthbarSprite;
-        }
+      private void ChangeHealthBarImage(int i)
+      {
+         if (i == 0) _healthbarImage.sprite = _maxHealthbarSprite;
+         else _healthbarImage.sprite = _lewisHealthbarSprite;
+      }
 
-        private void ChangeDriverRadio(int i)
-        {
-            SetDriverSettings(i);
-            _audioSource.Play();
-            _audioFinish.FinishAudio();
-        }
+      private void ChangeDriverRadio(int i)
+      {
+         SetDriverSettings(i);
+         _audioSource.Play();
+         _audioFinish.FinishAudio();
+      }
 
-        private void SetDriverSettings(int i)
-        {
-            if (i == 0)
-            {
-                _audioSource.clip = _verstappenRadio;
-                _driverText.text = "VERSTAPPEN";
-                var color = new Color(0.282353f, 0.4431373f, 0.7176471f);
-                _driverText.color = color;
-                _timerManager.ChangeTimerColor(color);
-            }
-            else
-            {
-                _audioSource.clip = _hamiltonRadio;
-                _driverText.text = "HAMILTON";
-                var color = new Color(0.4705883f, 0.8039216f, 0.7450981f);
-                _driverText.color = color;
-                _timerManager.ChangeTimerColor(color);
-            }
-        }
+      private void SetDriverSettings(int i)
+      {
+         if (i == 0)
+         {
+            _audioSource.clip = _verstappenRadio;
+            _driverText.text = "VERSTAPPEN";
+            var color = new Color(0.282353f, 0.4431373f, 0.7176471f);
+            _driverText.color = color;
+            _timerManager.ChangeTimerColor(color);
+         }
+         else
+         {
+            _audioSource.clip = _hamiltonRadio;
+            _driverText.text = "HAMILTON";
+            var color = new Color(0.4705883f, 0.8039216f, 0.7450981f);
+            _driverText.color = color;
+            _timerManager.ChangeTimerColor(color);
+         }
+      }
 
-        private IEnumerator ContinueGameCoroutine()
-        {
-            EventBus<ResetCarPositionEvent>.Emit(this, new ResetCarPositionEvent());
-            yield return new WaitForSeconds(1f);
-            EventBus<StartPitEnterEvent>.Emit(this, new StartPitEnterEvent());
-        }
-    }
+      private IEnumerator ContinueGameCoroutine()
+      {
+         EventBus<ResetCarPositionEvent>.Emit(this, new ResetCarPositionEvent());
+         yield return new WaitForSeconds(1f);
+         EventBus<StartPitEnterEvent>.Emit(this, new StartPitEnterEvent());
+      }
+   }
 
-    public enum Tire
-    {
-        Soft,
-        Medium,
-        Hard
-    }
+   public enum Tire
+   {
+      Soft,
+      Medium,
+      Hard
+   }
 }

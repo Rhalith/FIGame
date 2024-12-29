@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
-using Scripts.Events;
 using Scripts.EventBus;
+using Scripts.Events;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,7 +21,7 @@ namespace Scripts.Masi
          EventBus<TimeEndEvent>.AddListener(StopPenalty);
          EventBus<CallSafetyCarEvent>.AddListener(StopPenalty);
       }
-      
+
       private void OnDisable()
       {
          EventBus<TimeEndEvent>.RemoveListener(StopPenalty);
@@ -33,7 +32,7 @@ namespace Scripts.Masi
       {
          DisablePenalties();
       }
-      
+
       private void StopPenalty(object sender, TimeEndEvent @event)
       {
          DisablePenalties();
@@ -51,18 +50,21 @@ namespace Scripts.Masi
       {
          int i = Random.Range(0, 5);
          int j = Random.Range(0, 2);
-         
+
 
          switch (i)
          {
             case 1:
                penalty.ChangePenalty(Penalty.TenSeconds, _tenSecondSprites[j]);
                break;
+            case 2:
+               penalty.ChangePenalty(Penalty.PowerUp, powerUpSprites[j]);
+               break;
             default:
                penalty.ChangePenalty(Penalty.FiveSeconds, _fiveSecondSprites[j]);
                break;
          }
-         
+
       }
       public PenaltyHit GetPooledObject()
       {

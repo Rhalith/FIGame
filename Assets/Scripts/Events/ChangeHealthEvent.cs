@@ -1,7 +1,8 @@
 ﻿namespace Scripts.Events
 {
-    public struct ChangeHealthEvent
-    {
-        public float HealthChange;
-    }
+   public struct ChangeHealthEvent
+   {
+      public float UpdatedHealth;
+      public float MaxHealth;
+   }
 }

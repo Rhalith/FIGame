@@ -2,6 +2,7 @@ using Scripts.EventBus;
 using Scripts.Events;
 using Scripts.Menu;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,6 +56,7 @@ namespace Scripts.Managers
       [Header("Managers")][SerializeField] private PlayerManager _playerManager;
       [SerializeField] private MasiManager _masiManager;
       [SerializeField] private TimerManager _timerManager;
+      [SerializeField] private ScoreManager _scoreManager;
 
       #endregion
 
@@ -216,6 +218,16 @@ namespace Scripts.Managers
          EventBus<ResetCarPositionEvent>.Emit(this, new ResetCarPositionEvent());
          yield return new WaitForSeconds(1f);
          EventBus<StartPitEnterEvent>.Emit(this, new StartPitEnterEvent());
+      }
+
+
+      public Dictionary<string, float> GetScore()
+      {
+         return new()
+         {
+            {"MaxScore", PlayerPrefs.GetFloat("MaxScore", 0f) },
+            {"Score", _scoreManager._score}
+         };
       }
    }
 

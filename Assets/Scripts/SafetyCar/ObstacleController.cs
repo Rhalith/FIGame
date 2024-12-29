@@ -25,11 +25,18 @@ namespace Scripts.SafetyCar
         private void OnEnable()
         {
             EventBus<StartSafetyCarEvent>.AddListener(StartSpawningObstacles);
+            EventBus<IncreaseDifficultyEvent>.AddListener(DecreaseSpawnInterval);
         }
 
         private void OnDisable()
         {
             EventBus<StartSafetyCarEvent>.RemoveListener(StartSpawningObstacles);
+            EventBus<IncreaseDifficultyEvent>.RemoveListener(DecreaseSpawnInterval);
+        }
+
+        private void DecreaseSpawnInterval(object sender, IncreaseDifficultyEvent @event)
+        {
+            spawnInterval /= @event.IncreaseRate;
         }
 
         private void Update()

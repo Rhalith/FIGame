@@ -11,6 +11,12 @@ namespace Scripts.Managers
 {
    public class GameManager : MonoBehaviour
    {
+      #region Settings
+
+      [Header("Settings")][SerializeField] private float _increaseRate;
+
+      #endregion
+      
       #region Car
 
       [Header("Car")][SerializeField] private Image _car;
@@ -138,6 +144,7 @@ namespace Scripts.Managers
       public void ContinueGame()
       {
          _scrollBackground.Speed = 0.4f;
+         EventBus<IncreaseDifficultyEvent>.Emit(this, new IncreaseDifficultyEvent{IncreaseRate = _increaseRate});
          StartCoroutine(ContinueGameCoroutine());
       }
       

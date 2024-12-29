@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using Scripts.EventBus;
+using Scripts.Events;
 using UnityEngine;
 
 namespace Scripts.Masi
@@ -10,6 +13,21 @@ namespace Scripts.Masi
         [SerializeField] private float _fireRate;
 
         private bool _shooting;
+
+        private void OnEnable()
+        {
+            EventBus<IncreaseDifficultyEvent>.AddListener(IncreaseFireRate);
+        }
+        
+        private void OnDisable()
+        {
+            EventBus<IncreaseDifficultyEvent>.RemoveListener(IncreaseFireRate);
+        }
+
+        private void IncreaseFireRate(object sender, IncreaseDifficultyEvent @event)
+        {
+            _fireRate *= @event.IncreaseRate;
+        }
 
         public void StartShooting()
         {

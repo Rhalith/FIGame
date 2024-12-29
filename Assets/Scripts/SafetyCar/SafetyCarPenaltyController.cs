@@ -18,12 +18,14 @@ namespace Scripts.SafetyCar
         {
             EventBus<StartSafetyCarEvent>.AddListener(StartApplyingDamage);
             EventBus<EndSafetyCarEvent>.AddListener(StopApplyingDamage);
+            EventBus<IncreaseDifficultyEvent>.AddListener(IncreaseDamage);
         }
 
         private void OnDisable()
         {
             EventBus<StartSafetyCarEvent>.RemoveListener(StartApplyingDamage);
             EventBus<EndSafetyCarEvent>.RemoveListener(StopApplyingDamage);
+            EventBus<IncreaseDifficultyEvent>.RemoveListener(IncreaseDamage);
         }
 
         private void StartApplyingDamage(object sender, StartSafetyCarEvent @event)
@@ -34,6 +36,11 @@ namespace Scripts.SafetyCar
         private void StopApplyingDamage(object sender, EndSafetyCarEvent @event)
         {
             _canApplyDamage = false;
+        }
+        
+        private void IncreaseDamage(object sender, IncreaseDifficultyEvent @event)
+        {
+            damagePerSecond *= @event.IncreaseRate;
         }
 
 

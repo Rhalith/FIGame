@@ -1,3 +1,6 @@
+using System;
+using Scripts.EventBus;
+using Scripts.Events;
 using UnityEngine;
 
 namespace Scripts.Masi
@@ -6,6 +9,23 @@ namespace Scripts.Masi
     {
         [SerializeField] private Animator _moveAnimator;
         [SerializeField] private Animator _fireAnimator;
+
+
+        private void OnEnable()
+        {
+            EventBus<IncreaseDifficultyEvent>.AddListener(IncreaseAnimationSpeed);
+        }
+        
+        private void OnDisable()
+        {
+            EventBus<IncreaseDifficultyEvent>.RemoveListener(IncreaseAnimationSpeed);
+        }
+
+        private void IncreaseAnimationSpeed(object sender, IncreaseDifficultyEvent @event)
+        {
+            _moveAnimator.speed *= @event.IncreaseRate;
+            _fireAnimator.speed *= @event.IncreaseRate;
+        }
 
         public void StartComing()
         {

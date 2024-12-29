@@ -41,6 +41,7 @@ namespace Scripts.SafetyCar
         private void IncreaseDamage(object sender, IncreaseDifficultyEvent @event)
         {
             damagePerSecond *= @event.IncreaseRate;
+            damagePerSecond = Mathf.Round(damagePerSecond * 10f) / 10f;
         }
 
 

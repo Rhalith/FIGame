@@ -115,7 +115,9 @@ namespace Scripts.Managers
 
       public void SetupGame(bool isMax)
       {
-         EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = Tire.Soft });
+         // Emit a default tire setup without affecting health
+         ChangeTyreVisuals(Tire.Soft);
+
          if (isMax)
          {
             ChangeDriver(0);
@@ -172,6 +174,15 @@ namespace Scripts.Managers
 
       private void ChangeTyre(Tire tire)
       {
+         // Change visuals
+         ChangeTyreVisuals(tire);
+
+         // Emit tire change event to update player health
+         EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = tire });
+      }
+      
+      private void ChangeTyreVisuals(Tire tire)
+      {
          switch (tire)
          {
             case Tire.Soft:
@@ -187,8 +198,6 @@ namespace Scripts.Managers
                _tyreLogo.sprite = _hardTyreLogoSprite;
                break;
          }
-
-         EventBus<ChangeTireEvent>.Emit(this, new ChangeTireEvent { ChosenTire = tire });
       }
 
       private void ChangeDriver(int i)

@@ -18,27 +18,15 @@ namespace Scripts.Masi
 
       private void OnEnable()
       {
-         EventBus<TimeEndEvent>.AddListener(StopPenalty);
-         EventBus<CallSafetyCarEvent>.AddListener(StopPenalty);
+         EventBus<DisablePenaltiesEvent>.AddListener(DisablePenalties);
       }
 
       private void OnDisable()
       {
-         EventBus<TimeEndEvent>.RemoveListener(StopPenalty);
-         EventBus<CallSafetyCarEvent>.RemoveListener(StopPenalty);
+         EventBus<DisablePenaltiesEvent>.RemoveListener(DisablePenalties);
       }
 
-      private void StopPenalty(object sender, CallSafetyCarEvent @event)
-      {
-         DisablePenalties();
-      }
-
-      private void StopPenalty(object sender, TimeEndEvent @event)
-      {
-         DisablePenalties();
-      }
-
-      private void DisablePenalties()
+      private void DisablePenalties(object sender, DisablePenaltiesEvent @event)
       {
          foreach (var penalty in _penaltyHits)
          {

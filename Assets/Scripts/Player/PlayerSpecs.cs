@@ -15,8 +15,8 @@ namespace Scripts.Player
          { Tire.Hard, 200 }
       };
 
-      private float _maxHealth = tireMaxHealthList[Tire.Soft];
-      private float _playerHealth = tireMaxHealthList[Tire.Soft];
+      private float _maxHealth;
+      private float _playerHealth;
       public float PlayerSpeed { get; private set; }
 
 
@@ -51,6 +51,7 @@ namespace Scripts.Player
          if (_playerHealth <= 0)
          {
             EventBus<PlayerDeathEvent>.Emit(this, new PlayerDeathEvent());
+            EventBus<DisablePenaltiesEvent>.Emit(this, new DisablePenaltiesEvent());
             EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent{CanMove = false});
             GameManager.Instance.IsGameFinished = true;
          }

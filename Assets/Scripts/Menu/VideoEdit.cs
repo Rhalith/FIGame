@@ -13,7 +13,7 @@ namespace Scripts.Menu
             _videoPlayer.loopPointReached += OnFinish;
         }
 
-        void OnFinish(UnityEngine.Video.VideoPlayer vp)
+        private void OnFinish(UnityEngine.Video.VideoPlayer vp)
         {
             FinishVideo();
         }

@@ -140,6 +140,11 @@ namespace Scripts.Managers
          _scrollBackground.Speed = 0.4f;
          StartCoroutine(ContinueGameCoroutine());
       }
+      
+      public void ExitGame()
+      {
+         Application.Quit();
+      }
 
       public void SetTyre(string tire)
       {

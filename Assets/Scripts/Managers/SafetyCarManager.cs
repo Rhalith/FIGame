@@ -44,10 +44,12 @@ namespace Scripts.Managers
             _canCallSafetyCar = false;
             _lastSafetyCarCallTime = Time.time; // Record the time of this call
             EventBus<CallSafetyCarEvent>.Emit(this, new CallSafetyCarEvent());
+            EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent{CanMove = false});
         }
         
         public void StartSafetyCarMovement()
         {
+            EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent{CanMove = true});
             EventBus<StartSafetyCarEvent>.Emit(this, new StartSafetyCarEvent());
             EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = false });
         }

@@ -51,8 +51,8 @@ namespace Scripts.Player
          if (_playerHealth <= 0)
          {
             EventBus<PlayerDeathEvent>.Emit(this, new PlayerDeathEvent());
+            EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent{CanMove = false});
             GameManager.Instance.IsGameFinished = true;
-            StopPlayerMovement();
          }
       }
 
@@ -96,12 +96,6 @@ namespace Scripts.Player
 
          _playerHealth = health;
          EventBus<ChangeHealthEvent>.Emit(this, new ChangeHealthEvent { UpdatedHealth = _playerHealth, MaxHealth = _maxHealth });
-      }
-
-
-      private void StopPlayerMovement()
-      {
-         PlayerSpeed = 0;
       }
    }
 }

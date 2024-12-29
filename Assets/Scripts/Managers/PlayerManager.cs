@@ -94,6 +94,7 @@ namespace Scripts.Managers
             _animator.enabled = false;
             EventBus<PlaySongEvent>.Emit(this, new PlaySongEvent());
             EventBus<StartTimerEvent>.Emit(this, new StartTimerEvent());
+            EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent{CanMove = true});
          }
       }
 

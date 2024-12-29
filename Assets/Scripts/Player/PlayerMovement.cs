@@ -25,39 +25,18 @@ namespace Scripts.Player
         private void OnEnable()
         {
             EventBus<ResetCarPositionEvent>.AddListener(ResetCarPosition);
-            EventBus<StartTimerEvent>.AddListener(StartMovement);
-            EventBus<TimeEndEvent>.AddListener(StopMovement);
-            EventBus<CallSafetyCarEvent>.AddListener(StopMovement);
-            EventBus<StartSafetyCarEvent>.AddListener(StartMovement);
+            EventBus<SetPlayerMovementEvent>.AddListener(ChangeMovement);
         }
         
         private void OnDisable()
         {
             EventBus<ResetCarPositionEvent>.RemoveListener(ResetCarPosition);
-            EventBus<StartTimerEvent>.RemoveListener(StartMovement);
-            EventBus<TimeEndEvent>.RemoveListener(StopMovement);
-            EventBus<CallSafetyCarEvent>.RemoveListener(StopMovement);
-            EventBus<StartSafetyCarEvent>.RemoveListener(StartMovement);
+            EventBus<SetPlayerMovementEvent>.RemoveListener(ChangeMovement);
         }
 
-        private void StopMovement(object sender, CallSafetyCarEvent @event)
+        private void ChangeMovement(object sender, SetPlayerMovementEvent @event)
         {
-            _canMove = false;
-        }
-
-        private void StartMovement(object sender, StartSafetyCarEvent @event)
-        {
-            _canMove = true;
-        }
-
-        private void StartMovement(object sender, StartTimerEvent @event)
-        {
-            _canMove = true;
-        }
-
-        private void StopMovement(object sender, TimeEndEvent @event)
-        {
-            _canMove = false;
+            _canMove = @event.CanMove;
         }
 
         private void ResetCarPosition(object sender, ResetCarPositionEvent @event)

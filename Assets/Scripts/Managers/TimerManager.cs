@@ -120,6 +120,7 @@ namespace Scripts.Managers
         private void OnTimerEnd()
         {
             EventBus<TimeEndEvent>.Emit(this, new TimeEndEvent());
+            EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent{CanMove = false});
         }
     }
 }

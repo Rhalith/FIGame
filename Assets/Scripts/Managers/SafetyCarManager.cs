@@ -1,6 +1,5 @@
 ﻿using Scripts.EventBus;
 using Scripts.Events;
-using Scripts.SafetyCar;
 using UnityEngine;
 
 namespace Scripts.Managers

@@ -1,5 +1,4 @@
-﻿using System;
-using Scripts.EventBus;
+﻿using Scripts.EventBus;
 using Scripts.Events;
 using Scripts.Player;
 using UnityEngine;

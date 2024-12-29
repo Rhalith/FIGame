@@ -52,6 +52,14 @@ namespace Scripts.Player
          }
       }
 
+      public void HealPlayer(float heal)
+      {
+         if (_playerHealth >= 100) { return; }
+
+         _playerHealth += heal;
+         GameManager.Instance.Healthbar.SetHealth(_playerHealth);
+      }
+
       private void ResetPlayerHealth()
       {
          _playerHealth = 100;

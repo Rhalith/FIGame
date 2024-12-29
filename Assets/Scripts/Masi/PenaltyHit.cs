@@ -66,7 +66,7 @@ namespace Scripts.Masi
                break;
             case Penalty.PowerUp:
                // Add score?
-               collision.GetComponent<PlayerSpecs>().DamagePlayer(-10f);
+               collision.GetComponent<PlayerSpecs>().HealPlayer(7f);
                break;
          }
       }

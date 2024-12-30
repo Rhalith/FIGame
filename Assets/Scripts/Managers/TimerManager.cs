@@ -21,6 +21,7 @@ namespace Scripts.Managers
             EventBus<PlayerDeathEvent>.AddListener(StopTimer);
             EventBus<CallSafetyCarEvent>.AddListener(PauseTimer);
             EventBus<SendSafetyCarEvent>.AddListener(ResumeTimer);
+            EventBus<ResetSafetyCarEvent>.AddListener(ResetSafetyCarTimer);
         }
 
         private void OnDisable()
@@ -29,6 +30,7 @@ namespace Scripts.Managers
             EventBus<PlayerDeathEvent>.RemoveListener(StopTimer);
             EventBus<CallSafetyCarEvent>.RemoveListener(PauseTimer);
             EventBus<SendSafetyCarEvent>.RemoveListener(ResumeTimer);
+            EventBus<ResetSafetyCarEvent>.RemoveListener(ResetSafetyCarTimer);
         }
 
         private void PauseTimer(object sender, CallSafetyCarEvent @event)
@@ -69,6 +71,11 @@ namespace Scripts.Managers
                 StopCoroutine(_countdownCoroutine);
                 _countdownCoroutine = null; // Clear the reference
             }
+        }
+        
+        private void ResetSafetyCarTimer(object sender, ResetSafetyCarEvent @event)
+        {
+            _isPaused = false;
         }
 
         private IEnumerator CountdownTimer()

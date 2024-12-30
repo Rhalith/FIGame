@@ -68,6 +68,7 @@ namespace Scripts.Managers
          {
             ChangeBackGroundSpeed(0, 1f);
             _tireMenu.SetActive(true);
+            GameManager.Instance.CanPause = false;
             EventBus<TyreAnimationEvent>.Emit(this, new TyreAnimationEvent { ShouldStop = true });
             EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = true });
          }

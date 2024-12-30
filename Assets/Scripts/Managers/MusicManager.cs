@@ -58,7 +58,7 @@ namespace Scripts.Managers
         private void Update()
         {
             // Check if the current song has finished playing
-            if (!_audioSource.isPlaying && _audioSource.clip != null && _shouldPlay)
+            if (!_audioSource.isPlaying && _audioSource.clip != null && _shouldPlay && !GameManager.Instance.IsPaused)
             {
                 PlayRandomMusic();
                 InitializeDisplayedText();

@@ -3,6 +3,7 @@ using Scripts.EventBus;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using Scripts.Managers;
 
 namespace Scripts.SafetyCar
 {
@@ -31,6 +32,7 @@ namespace Scripts.SafetyCar
         {
             _safetyCarText.text = "STAY BEHIND\nSafety Car";
             _safetyCarPanel.SetActive(true);
+            GameManager.Instance.CanPause = false;
             _safetyCarPanel.transform.localScale = Vector3.zero; // Start from 0 scale
             _safetyCarPanel.transform.DOScale(Vector3.one, animationDuration).SetEase(Ease.OutBack).OnComplete(() =>
             {
@@ -43,7 +45,10 @@ namespace Scripts.SafetyCar
         {
             _safetyCarPanel.transform.DOScale(Vector3.zero, animationDuration)
                 .SetEase(Ease.InBack)
-                .OnComplete(() => _safetyCarPanel.SetActive(false)); // Disable after animation
+                .OnComplete(() =>
+                {
+                    _safetyCarPanel.SetActive(false);
+                }); // Disable after animation
         }
 
         private void ChangeSafetyCarText(object sender, EndSafetyCarEvent @event)

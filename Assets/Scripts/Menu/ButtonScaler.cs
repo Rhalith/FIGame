@@ -63,7 +63,7 @@ namespace Scripts.Menu
 
             while (Vector3.Distance(transform.localScale, target) > 0.01f)
             {
-                transform.localScale = Vector3.Lerp(transform.localScale, target, scaleSpeed * Time.deltaTime);
+                transform.localScale = Vector3.Lerp(transform.localScale, target, scaleSpeed * Time.unscaledDeltaTime);
                 yield return null;
             }
 

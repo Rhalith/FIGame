@@ -81,6 +81,7 @@ namespace Scripts.Managers
          // Show the score panel after animation
          sequence.AppendCallback(() =>
          {
+            GameManager.Instance.CanPause = false;
             _scorePanel.SetActive(true);
             EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = true });
          });

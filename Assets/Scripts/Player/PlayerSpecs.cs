@@ -54,6 +54,7 @@ namespace Scripts.Player
             EventBus<DisablePenaltiesEvent>.Emit(this, new DisablePenaltiesEvent());
             EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent{CanMove = false});
             GameManager.Instance.IsGameFinished = true;
+            GameManager.Instance.CanPause = false;
          }
       }
 

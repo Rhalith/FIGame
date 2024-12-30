@@ -50,6 +50,7 @@ namespace Scripts.Managers
         
         public void StartSafetyCarMovement()
         {
+            GameManager.Instance.CanPause = true;
             EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent{CanMove = true});
             EventBus<StartSafetyCarEvent>.Emit(this, new StartSafetyCarEvent());
             EventBus<CheckSelectableElementEvent>.Emit(this, new CheckSelectableElementEvent { CanSelect = false });

@@ -3279,7 +3279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be196f7338e14049a78310ed0fa00777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 5
+  _time: 50
   _timerText: {fileID: 320755389}
 --- !u!1 &421648481
 GameObject:
@@ -4095,7 +4095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &574078560
 Transform:
   m_ObjectHideFlags: 0
@@ -12729,7 +12729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1627342624
 Transform:
   m_ObjectHideFlags: 0
@@ -13826,6 +13826,7 @@ GameObject:
   - component: {fileID: 1745201835}
   - component: {fileID: 1745201836}
   - component: {fileID: 1745201837}
+  - component: {fileID: 1745201838}
   m_Layer: 5
   m_Name: VolumeAdjuster
   m_TagString: Untagged
@@ -13932,6 +13933,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioMixer: {fileID: 24100000, guid: 0ff57c7a5bc28f54582e6625c32ce7c5, type: 2}
+--- !u!114 &1745201838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745201834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56dd03d37104196ad021c16821a559b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 1.15
+  scaleSpeed: 10
 --- !u!1001 &1762703204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15085,7 +15100,7 @@ RectTransform:
   m_Father: {fileID: 387424451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

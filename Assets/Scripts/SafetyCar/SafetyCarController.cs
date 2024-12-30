@@ -32,6 +32,7 @@ namespace Scripts.SafetyCar
          EventBus<CallSafetyCarEvent>.AddListener(HandleCallSafetyCar);
          EventBus<StartSafetyCarEvent>.AddListener(HandleStartSafetyCar);
          EventBus<EndSafetyCarEvent>.AddListener(HandleEndSafetyCar);
+         EventBus<ResetSafetyCarEvent>.AddListener(ResetSafetyCar);
       }
 
       private void OnDisable()
@@ -39,6 +40,7 @@ namespace Scripts.SafetyCar
          EventBus<CallSafetyCarEvent>.RemoveListener(HandleCallSafetyCar);
          EventBus<StartSafetyCarEvent>.RemoveListener(HandleStartSafetyCar);
          EventBus<EndSafetyCarEvent>.RemoveListener(HandleEndSafetyCar);
+         EventBus<ResetSafetyCarEvent>.RemoveListener(ResetSafetyCar);
       }
 
       private void Update()
@@ -69,6 +71,17 @@ namespace Scripts.SafetyCar
          _oscillating = false;
          _movingToEnd = true;
          _currentTarget = new Vector3(_endPosition.x, _endPosition.y, transform.localPosition.z);
+      }
+      
+      
+      private void ResetSafetyCar(object sender, ResetSafetyCarEvent @event)
+      {
+         transform.localPosition = new Vector3(_startPosition.x, _startPosition.y, transform.localPosition.z);
+         _currentTarget = transform.localPosition;
+         _oscillating = false;
+         _movingToEnd = false;
+         _movingToStart = false;
+         _shouldMove = false;
       }
 
       private void MoveTowardsTarget()

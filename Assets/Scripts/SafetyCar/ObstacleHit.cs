@@ -6,9 +6,9 @@ namespace Scripts.SafetyCar
 {
     public class ObstacleHit : MonoBehaviour
     {
-        [SerializeField] private float _speed; // Speed of the obstacle movement
-        [SerializeField] private float _damage = 10f; // Damage dealt by the obstacle
-        [SerializeField] private Image _image; // Sprite renderer for obstacle
+        [SerializeField] private float _speed;
+        [SerializeField] private float _damage = 10f;
+        [SerializeField] private Image _image;
 
         private void Update()
         {

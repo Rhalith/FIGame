@@ -48,7 +48,7 @@ namespace Scripts.Player
       {
          SetPlayerHealth(_playerHealth - damage);
 
-         if (_playerHealth <= 0)
+         if (_playerHealth <= 0 && !GameManager.Instance.IsGameFinished)
          {
             EventBus<PlayerDeathEvent>.Emit(this, new PlayerDeathEvent());
             EventBus<DisablePenaltiesEvent>.Emit(this, new DisablePenaltiesEvent());

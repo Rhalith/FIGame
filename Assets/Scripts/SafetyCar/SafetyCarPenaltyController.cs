@@ -19,6 +19,7 @@ namespace Scripts.SafetyCar
             EventBus<StartSafetyCarEvent>.AddListener(StartApplyingDamage);
             EventBus<EndSafetyCarEvent>.AddListener(StopApplyingDamage);
             EventBus<IncreaseDifficultyEvent>.AddListener(IncreaseDamage);
+            EventBus<ResetSafetyCarEvent>.AddListener(ResetSafetyCar);
         }
 
         private void OnDisable()
@@ -26,6 +27,7 @@ namespace Scripts.SafetyCar
             EventBus<StartSafetyCarEvent>.RemoveListener(StartApplyingDamage);
             EventBus<EndSafetyCarEvent>.RemoveListener(StopApplyingDamage);
             EventBus<IncreaseDifficultyEvent>.RemoveListener(IncreaseDamage);
+            EventBus<ResetSafetyCarEvent>.RemoveListener(ResetSafetyCar);
         }
 
         private void StartApplyingDamage(object sender, StartSafetyCarEvent @event)
@@ -43,8 +45,12 @@ namespace Scripts.SafetyCar
             damagePerSecond *= @event.IncreaseRate;
             damagePerSecond = Mathf.Round(damagePerSecond * 10f) / 10f;
         }
-
-
+        
+        private void ResetSafetyCar(object sender, ResetSafetyCarEvent @event)
+        {
+            _canApplyDamage = false;
+            _damageTimer = 0;
+        }
         private void Update()
         {
             if(!_canApplyDamage) return;

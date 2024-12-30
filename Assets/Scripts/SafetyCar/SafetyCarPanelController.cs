@@ -19,6 +19,7 @@ namespace Scripts.SafetyCar
             EventBus<CallSafetyCarEvent>.AddListener(ShowSafetyCarPanel);
             EventBus<SendSafetyCarEvent>.AddListener(CloseSafetyCarPanel);
             EventBus<EndSafetyCarEvent>.AddListener(ChangeSafetyCarText);
+            EventBus<ResetSafetyCarEvent>.AddListener(ResetSafetyCarPanel);
         }
 
         private void OnDisable()
@@ -26,6 +27,7 @@ namespace Scripts.SafetyCar
             EventBus<CallSafetyCarEvent>.RemoveListener(ShowSafetyCarPanel);
             EventBus<SendSafetyCarEvent>.RemoveListener(CloseSafetyCarPanel);
             EventBus<EndSafetyCarEvent>.RemoveListener(ChangeSafetyCarText);
+            EventBus<ResetSafetyCarEvent>.RemoveListener(ResetSafetyCarPanel);
         }
 
         private void ShowSafetyCarPanel(object sender, CallSafetyCarEvent @event)
@@ -49,6 +51,13 @@ namespace Scripts.SafetyCar
                 {
                     _safetyCarPanel.SetActive(false);
                 }); // Disable after animation
+        }
+        
+        
+        private void ResetSafetyCarPanel(object sender, ResetSafetyCarEvent @event)
+        {
+            _safetyCarPanel.SetActive(false);
+            _safetyCarInfoPanel.SetActive(false);
         }
 
         private void ChangeSafetyCarText(object sender, EndSafetyCarEvent @event)

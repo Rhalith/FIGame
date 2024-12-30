@@ -162,6 +162,7 @@ namespace Scripts.Managers
             _audioFinish.gameObject.SetActive(true);
             _scrollBackground.Speed = 0.4f;
             EventBus<SetPlayerMovementEvent>.Emit(this, new SetPlayerMovementEvent { CanMove = false });
+            EventBus<ResetSafetyCarEvent>.Emit(this, new ResetSafetyCarEvent());
             _mainGame.SetActive(false);
             _mainMenu.SetActive(true);
             _isGameFinished = false;

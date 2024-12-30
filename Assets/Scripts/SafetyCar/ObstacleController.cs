@@ -27,6 +27,7 @@ namespace Scripts.SafetyCar
             EventBus<StartSafetyCarEvent>.AddListener(StartSpawningObstacles);
             EventBus<IncreaseDifficultyEvent>.AddListener(DecreaseSpawnInterval);
             EventBus<DisablePenaltiesEvent>.AddListener(DisableObstacles);
+            EventBus<ResetSafetyCarEvent>.AddListener(ResetSafetyCar);
         }
 
         private void OnDisable()
@@ -34,6 +35,7 @@ namespace Scripts.SafetyCar
             EventBus<StartSafetyCarEvent>.RemoveListener(StartSpawningObstacles);
             EventBus<IncreaseDifficultyEvent>.RemoveListener(DecreaseSpawnInterval);
             EventBus<DisablePenaltiesEvent>.RemoveListener(DisableObstacles);
+            EventBus<ResetSafetyCarEvent>.RemoveListener(ResetSafetyCar);
         }
 
         private void DisableObstacles(object sender, DisablePenaltiesEvent @event)
@@ -44,6 +46,11 @@ namespace Scripts.SafetyCar
         private void DecreaseSpawnInterval(object sender, IncreaseDifficultyEvent @event)
         {
             spawnInterval /= @event.IncreaseRate;
+        }
+        
+        private void ResetSafetyCar(object sender, ResetSafetyCarEvent @event)
+        {
+            StopSpawningObstacles();
         }
 
         private void Update()

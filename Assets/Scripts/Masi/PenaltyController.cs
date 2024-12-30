@@ -11,10 +11,10 @@ namespace Scripts.Masi
       [SerializeField] private GameObject _masi;
       [SerializeField] private GameObject _penaltyPrefab;
 
-      [SerializeField] List<PenaltyHit> _penaltyHits;
-      [SerializeField] List<Sprite> _fiveSecondSprites;
-      [SerializeField] List<Sprite> _tenSecondSprites;
-      [SerializeField] List<Sprite> powerUpSprites;
+      [SerializeField] private List<PenaltyHit> _penaltyHits;
+      [SerializeField] private Sprite _fiveSecondSprite;
+      [SerializeField] private Sprite _tenSecondSprite;
+      [SerializeField] private Sprite powerUpSprite;
 
       private void OnEnable()
       {
@@ -37,19 +37,17 @@ namespace Scripts.Masi
       private void PreparePenalty(PenaltyHit penalty)
       {
          int i = Random.Range(0, 5);
-         int j = Random.Range(0, 2);
-
-
+         
          switch (i)
          {
             case 1:
-               penalty.ChangePenalty(Penalty.TenSeconds, _tenSecondSprites[j]);
+               penalty.ChangePenalty(Penalty.TenSeconds, _tenSecondSprite);
                break;
             case 2:
-               penalty.ChangePenalty(Penalty.PowerUp, powerUpSprites[j]);
+               penalty.ChangePenalty(Penalty.PowerUp, powerUpSprite);
                break;
             default:
-               penalty.ChangePenalty(Penalty.FiveSeconds, _fiveSecondSprites[j]);
+               penalty.ChangePenalty(Penalty.FiveSeconds, _fiveSecondSprite);
                break;
          }
 

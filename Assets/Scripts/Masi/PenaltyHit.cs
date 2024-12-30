@@ -48,7 +48,7 @@ namespace Scripts.Masi
             CheckPenalty(collision);
             gameObject.SetActive(false);
          }
-         else if (!collision.CompareTag("SafetyCar"))
+         else
          {
             StartCoroutine(DisableObject());
          }

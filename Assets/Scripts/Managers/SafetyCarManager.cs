@@ -7,7 +7,7 @@ namespace Scripts.Managers
     public class SafetyCarManager : MonoBehaviour
     {
         [SerializeField] private int _safetyCarProbability;
-        [SerializeField] private float _safetyCarCooldown; // Cooldown period in seconds
+        [SerializeField] private float _safetyCarCooldown;
         
         private bool _canCallSafetyCar;
         private float _lastSafetyCarCallTime = -Mathf.Infinity;
@@ -15,16 +15,24 @@ namespace Scripts.Managers
         private void OnEnable()
         {
             EventBus<ChangeSafetyCarStatusEvent>.AddListener(ChangeSafetyCarStatus);
+            EventBus<ResetSafetyCarEvent>.AddListener(ResetSafetyCar);
         }
         
         private void OnDisable()
         {
             EventBus<ChangeSafetyCarStatusEvent>.RemoveListener(ChangeSafetyCarStatus);
+            EventBus<ResetSafetyCarEvent>.RemoveListener(ResetSafetyCar);
         }
 
         private void ChangeSafetyCarStatus(object sender, ChangeSafetyCarStatusEvent @event)
         {
             _canCallSafetyCar = @event.CanSafetyCarBeDeployed;
+        }
+        
+        private void ResetSafetyCar(object sender, ResetSafetyCarEvent @event)
+        {
+            _canCallSafetyCar = true;
+            _lastSafetyCarCallTime = -Mathf.Infinity;
         }
 
         private void FixedUpdate()
